@@ -1,20 +1,130 @@
-# purehavenorganics
+# Natural Remedies App
 <<<<<<< HEAD
-Herbs have been used for centuries to treat ailments, enhance health, and support overall well-being. Each herb contains unique compounds that can help heal the body, balance the mind, and restore energy. In this chapter, we’ll explore some of the most common and powerful healing herbs, their properties, and how you can use them in your daily life.
+A comprehensive mobile application that bridges traditional herbal wisdom with modern scientific understanding. This app serves as your personal guide to natural healing, offering evidence-based information about herbs, remedies, and holistic wellness.
 =======
 
-A new Flutter project.
+Pure Haven Organics.
+=======
 
-## Getting Started
+A comprehensive mobile application that bridges traditional herbal wisdom with modern scientific understanding. This app serves as your personal guide to natural healing, offering evidence-based information about herbs, remedies, and holistic wellness.
+>>>>>>> 0e4d390 (Detailed README.md file)
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+### 🌿 Herbal Database
+- Detailed profiles of medicinal herbs
+- Scientific names and common names
+- Active compounds and mechanisms of action
+- Traditional uses and modern research
+- Growing conditions and sustainability
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<<<<<<< HEAD
+Here are a few resources to get you started if this is your first Flutter project:
+=======
+### 🏥 Health Concerns
+- Common ailments and their natural remedies
+- Scientifically validated herbal combinations
+- Preparation methods and dosage guidelines
+- Safety information and precautions
+>>>>>>> 0e4d390 (Detailed README.md file)
 
-For help getting started with Flutter development, view the
+### 💊 Remedy Combinations
+- Synergistic herb pairings
+- Traditional formulations
+- Safety ratings and interaction warnings
+- Preparation instructions
+
+<<<<<<< HEAD
+For help getting started with Flutter development, please take a look at the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
->>>>>>> b4e407b (Initial commit)
+=======
+### 📱 User Features
+- Favorite herbs and remedies
+- Personalized wellness tips
+- Search and filter capabilities
+- Educational content
+
+### 🔒 Safety First
+- Contraindications and warnings
+- Drug interaction information
+- Pregnancy and age-specific guidance
+- Medical supervision recommendations
+
+## Technical Stack
+
+- **Frontend:** Flutter/Dart
+- **Backend:** Supabase
+- **Database:** PostgreSQL
+- **State Management:** Riverpod
+- **Authentication:** Supabase Auth
+
+## Database Schema
+
+The app utilizes a sophisticated database structure including:
+- Herbs catalog
+- Health conditions
+- Remedy relationships
+- Scientific evidence
+- Safety information
+
+## Screenshots
+
+[Screenshots of key app features]
+
+## Installation
+
+```bash
+# Clone the repository
+git clone git@github.com:kitaaj/purehavenorganics.git
+
+# Navigate to project directory
+cd purehavenorganics
+
+# Install dependencies
+flutter pub get
+
+# Run the app
+flutter run
+```
+
+
+## Disclaimer
+
+This app is for educational purposes only. Always consult healthcare professionals before starting any treatment regimen.
+
+
+## Acknowledgments
+
+- Traditional healing systems worldwide
+- Modern scientific research
+- Open-source community
+
+## Contact
+Founder/Co-Founder: Evalyne M. Ndanu
+Developer: Kitaa John
+Contact: hekneels@gmail.com
+
+---
+
+### Why Natural Remedies?
+
+In today's world of increasing health consciousness and desire for natural solutions, this app bridges the gap between traditional wisdom and modern science. It provides:
+
+- **Evidence-Based Information:** Combining traditional knowledge with scientific research
+- **Safety-First Approach:** Comprehensive safety information and warnings
+- **Practical Guidance:** Clear preparation and usage instructions
+- **Educational Resource:** In-depth information about natural healing
+
+### Future Plans
+
+- Integration with wearable devices
+- Personalized remedy recommendations
+- Community features
+- Expert consultation integration
+- Additional language support
+
+### Support
+
+For support, please [create an issue](mailto:hekneels@gmail.com) or contact hekneels@gmail.com.
+>>>>>>> 0e4d390 (Detailed README.md file)
