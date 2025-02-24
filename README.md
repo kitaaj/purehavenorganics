@@ -1,5 +1,5 @@
 # Natural Remedies App
-<<<<<<< HEAD
+
 A comprehensive mobile application that bridges traditional herbal wisdom with modern scientific understanding. This app serves as your personal guide to natural healing, offering evidence-based information about herbs, remedies, and holistic wellness.
 =======
 
@@ -18,8 +18,7 @@ A comprehensive mobile application that bridges traditional herbal wisdom with m
 - Traditional uses and modern research
 - Growing conditions and sustainability
 
-<<<<<<< HEAD
-Here are a few resources to get you started if this is your first Flutter project:
+
 =======
 ### 🏥 Health Concerns
 - Common ailments and their natural remedies
@@ -34,10 +33,6 @@ Here are a few resources to get you started if this is your first Flutter projec
 - Safety ratings and interaction warnings
 - Preparation instructions
 
-<<<<<<< HEAD
-For help getting started with Flutter development, please take a look at the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 =======
 ### 📱 User Features
 - Favorite herbs and remedies
@@ -126,5 +121,5 @@ In today's world of increasing health consciousness and desire for natural solut
 
 ### Support
 
-For support, please [create an issue](mailto:hekneels@gmail.com) or contact hekneels@gmail.com.
+For support, please [create an issue](mailto:hekneels@gmail.com).
 >>>>>>> 0e4d390 (Detailed README.md file)
