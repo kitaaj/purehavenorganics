@@ -96,8 +96,8 @@ This app is for educational purposes only. Always consult healthcare professiona
 - Open-source community
 
 ## Contact
-Founder/Co-Founder: Evalyne M. Ndanu
-Developer: Kitaa John
+- Founder/Co-Founder: Evalyne M. Ndanu
+- Developer: Kitaa John
 Contact: hekneels@gmail.com
 
 ---

@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:purehavenorganics/presentation/widgets/remedy/remedy_grid_view.dart';
-import 'package:purehavenorganics/presentation/widgets/search/search_bar_delegate.dart';
+import 'package:purehavenorganics/core/config/app_router.dart';
+import 'package:purehavenorganics/presentation/providers/providers.dart';
 import 'package:purehavenorganics/presentation/widgets/category/category_selector.dart';
 import 'package:purehavenorganics/presentation/widgets/remedy/featured_remedies_section.dart';
+import 'package:purehavenorganics/presentation/widgets/remedy/remedy_grid_view.dart';
+import 'package:purehavenorganics/presentation/widgets/search/advanced_search_bar.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final featuredRemedies = ref.watch(featuredRemediesProvider);
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
+          SliverAppBar.large(
+            expandedHeight: 100,
             floating: true,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('Natural Remedies'),
+              centerTitle: false,
+              title: const Text('Natural Remedies'),
+              
               background: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -34,66 +35,97 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         end: Alignment.bottomCenter,
                         colors: [
                           Theme.of(context).primaryColor,
-                          Theme.of(context).primaryColor.withValues(alpha:0.7),
+                          Theme.of(context).primaryColor.withValues(alpha: 0.7),
                         ],
                       ),
                     ),
                   ),
-                  // Placeholder for hero image
-                  const Positioned.fill(
-                    child: ColoredBox(color: Colors.black12),
-                  ),
                 ],
               ),
             ),
+            actions: [ IconButton(
+                icon: const Icon(Icons.notifications_outlined),
+                onPressed: () {
+                  // Handle notifications
+                },
+              ),],
           ),
-          SliverPersistentHeader(
-            delegate: SearchBarDelegate(
-              ref: ref,
-            ),
-            pinned: true,
-          ),
+           // User Profile Section
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: CategorySelector(
-                onCategorySelected: (category) {
-                  // Handle category selection
-                },
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: Icon(
+                          Icons.person,
+                          size: 32,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Welcome!',
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Navigate to profile or sign in
+                                Navigator.pushNamed(context, AppRoutes.profile);
+                              },
+                              child: const Text('Sign in to personalize your experience'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
           const SliverToBoxAdapter(
-            child: FeaturedRemediesSection(),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: AdvancedSearchBar(),
+            ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            sliver: RemedyGridView(),
+          SliverToBoxAdapter(
+            child: CategorySelector(
+              onCategorySelected: (category) {
+                Navigator.of(context,rootNavigator: true).pushNamed(
+                  
+                  AppRoutes.categoryRemedies,
+                  arguments: category,
+                );
+              },
+            ),
           ),
+          featuredRemedies.when(
+            data:
+                (remedies) => SliverToBoxAdapter(
+                  child: FeaturedRemediesSection(remedies: remedies),
+                ),
+            loading:
+                () => const SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+            error:
+                (error, _) => SliverToBoxAdapter(
+                  child: Center(child: Text('Error: $error')),
+                ),
+          ),
+          const RemedyGridView(),
         ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        destinations: [
-          NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.category),
-            label: 'Categories',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.healing),
-            label: 'Conditions',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        onDestinationSelected: (index) {
-          // Handle navigation
-        },
       ),
     );
   }

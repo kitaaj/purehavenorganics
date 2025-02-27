@@ -22,12 +22,10 @@ HealthCategory _$HealthCategoryFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$HealthCategory {
   int get categoryId => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get displayName => throw _privateConstructorUsedError;
   int? get parentCategoryId => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  int get hierarchyLevel => throw _privateConstructorUsedError;
-  String? get categoryPath => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  int get level => throw _privateConstructorUsedError;
+  bool get isLeaf => throw _privateConstructorUsedError;
 
   /// Serializes this HealthCategory to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,12 +46,10 @@ abstract class $HealthCategoryCopyWith<$Res> {
   @useResult
   $Res call({
     int categoryId,
-    String name,
+    String displayName,
     int? parentCategoryId,
-    String? description,
-    int hierarchyLevel,
-    String? categoryPath,
-    DateTime? createdAt,
+    int level,
+    bool isLeaf,
   });
 }
 
@@ -73,12 +69,10 @@ class _$HealthCategoryCopyWithImpl<$Res, $Val extends HealthCategory>
   @override
   $Res call({
     Object? categoryId = null,
-    Object? name = null,
+    Object? displayName = null,
     Object? parentCategoryId = freezed,
-    Object? description = freezed,
-    Object? hierarchyLevel = null,
-    Object? categoryPath = freezed,
-    Object? createdAt = freezed,
+    Object? level = null,
+    Object? isLeaf = null,
   }) {
     return _then(
       _value.copyWith(
@@ -87,36 +81,26 @@ class _$HealthCategoryCopyWithImpl<$Res, $Val extends HealthCategory>
                     ? _value.categoryId
                     : categoryId // ignore: cast_nullable_to_non_nullable
                         as int,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
+            displayName:
+                null == displayName
+                    ? _value.displayName
+                    : displayName // ignore: cast_nullable_to_non_nullable
                         as String,
             parentCategoryId:
                 freezed == parentCategoryId
                     ? _value.parentCategoryId
                     : parentCategoryId // ignore: cast_nullable_to_non_nullable
                         as int?,
-            description:
-                freezed == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            hierarchyLevel:
-                null == hierarchyLevel
-                    ? _value.hierarchyLevel
-                    : hierarchyLevel // ignore: cast_nullable_to_non_nullable
+            level:
+                null == level
+                    ? _value.level
+                    : level // ignore: cast_nullable_to_non_nullable
                         as int,
-            categoryPath:
-                freezed == categoryPath
-                    ? _value.categoryPath
-                    : categoryPath // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
+            isLeaf:
+                null == isLeaf
+                    ? _value.isLeaf
+                    : isLeaf // ignore: cast_nullable_to_non_nullable
+                        as bool,
           )
           as $Val,
     );
@@ -134,12 +118,10 @@ abstract class _$$HealthCategoryImplCopyWith<$Res>
   @useResult
   $Res call({
     int categoryId,
-    String name,
+    String displayName,
     int? parentCategoryId,
-    String? description,
-    int hierarchyLevel,
-    String? categoryPath,
-    DateTime? createdAt,
+    int level,
+    bool isLeaf,
   });
 }
 
@@ -158,12 +140,10 @@ class __$$HealthCategoryImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? categoryId = null,
-    Object? name = null,
+    Object? displayName = null,
     Object? parentCategoryId = freezed,
-    Object? description = freezed,
-    Object? hierarchyLevel = null,
-    Object? categoryPath = freezed,
-    Object? createdAt = freezed,
+    Object? level = null,
+    Object? isLeaf = null,
   }) {
     return _then(
       _$HealthCategoryImpl(
@@ -172,36 +152,26 @@ class __$$HealthCategoryImplCopyWithImpl<$Res>
                 ? _value.categoryId
                 : categoryId // ignore: cast_nullable_to_non_nullable
                     as int,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
+        displayName:
+            null == displayName
+                ? _value.displayName
+                : displayName // ignore: cast_nullable_to_non_nullable
                     as String,
         parentCategoryId:
             freezed == parentCategoryId
                 ? _value.parentCategoryId
                 : parentCategoryId // ignore: cast_nullable_to_non_nullable
                     as int?,
-        description:
-            freezed == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        hierarchyLevel:
-            null == hierarchyLevel
-                ? _value.hierarchyLevel
-                : hierarchyLevel // ignore: cast_nullable_to_non_nullable
+        level:
+            null == level
+                ? _value.level
+                : level // ignore: cast_nullable_to_non_nullable
                     as int,
-        categoryPath:
-            freezed == categoryPath
-                ? _value.categoryPath
-                : categoryPath // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
+        isLeaf:
+            null == isLeaf
+                ? _value.isLeaf
+                : isLeaf // ignore: cast_nullable_to_non_nullable
+                    as bool,
       ),
     );
   }
@@ -212,12 +182,10 @@ class __$$HealthCategoryImplCopyWithImpl<$Res>
 class _$HealthCategoryImpl implements _HealthCategory {
   const _$HealthCategoryImpl({
     required this.categoryId,
-    required this.name,
+    required this.displayName,
     this.parentCategoryId,
-    this.description,
-    required this.hierarchyLevel,
-    this.categoryPath,
-    this.createdAt,
+    required this.level,
+    required this.isLeaf,
   });
 
   factory _$HealthCategoryImpl.fromJson(Map<String, dynamic> json) =>
@@ -226,21 +194,17 @@ class _$HealthCategoryImpl implements _HealthCategory {
   @override
   final int categoryId;
   @override
-  final String name;
+  final String displayName;
   @override
   final int? parentCategoryId;
   @override
-  final String? description;
+  final int level;
   @override
-  final int hierarchyLevel;
-  @override
-  final String? categoryPath;
-  @override
-  final DateTime? createdAt;
+  final bool isLeaf;
 
   @override
   String toString() {
-    return 'HealthCategory(categoryId: $categoryId, name: $name, parentCategoryId: $parentCategoryId, description: $description, hierarchyLevel: $hierarchyLevel, categoryPath: $categoryPath, createdAt: $createdAt)';
+    return 'HealthCategory(categoryId: $categoryId, displayName: $displayName, parentCategoryId: $parentCategoryId, level: $level, isLeaf: $isLeaf)';
   }
 
   @override
@@ -250,17 +214,12 @@ class _$HealthCategoryImpl implements _HealthCategory {
             other is _$HealthCategoryImpl &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
             (identical(other.parentCategoryId, parentCategoryId) ||
                 other.parentCategoryId == parentCategoryId) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.hierarchyLevel, hierarchyLevel) ||
-                other.hierarchyLevel == hierarchyLevel) &&
-            (identical(other.categoryPath, categoryPath) ||
-                other.categoryPath == categoryPath) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+            (identical(other.level, level) || other.level == level) &&
+            (identical(other.isLeaf, isLeaf) || other.isLeaf == isLeaf));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -268,12 +227,10 @@ class _$HealthCategoryImpl implements _HealthCategory {
   int get hashCode => Object.hash(
     runtimeType,
     categoryId,
-    name,
+    displayName,
     parentCategoryId,
-    description,
-    hierarchyLevel,
-    categoryPath,
-    createdAt,
+    level,
+    isLeaf,
   );
 
   /// Create a copy of HealthCategory
@@ -296,12 +253,10 @@ class _$HealthCategoryImpl implements _HealthCategory {
 abstract class _HealthCategory implements HealthCategory {
   const factory _HealthCategory({
     required final int categoryId,
-    required final String name,
+    required final String displayName,
     final int? parentCategoryId,
-    final String? description,
-    required final int hierarchyLevel,
-    final String? categoryPath,
-    final DateTime? createdAt,
+    required final int level,
+    required final bool isLeaf,
   }) = _$HealthCategoryImpl;
 
   factory _HealthCategory.fromJson(Map<String, dynamic> json) =
@@ -310,17 +265,13 @@ abstract class _HealthCategory implements HealthCategory {
   @override
   int get categoryId;
   @override
-  String get name;
+  String get displayName;
   @override
   int? get parentCategoryId;
   @override
-  String? get description;
+  int get level;
   @override
-  int get hierarchyLevel;
-  @override
-  String? get categoryPath;
-  @override
-  DateTime? get createdAt;
+  bool get isLeaf;
 
   /// Create a copy of HealthCategory
   /// with the given fields replaced by the non-null parameter values.

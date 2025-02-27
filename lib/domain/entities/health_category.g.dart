@@ -9,25 +9,18 @@ part of 'health_category.dart';
 _$HealthCategoryImpl _$$HealthCategoryImplFromJson(Map<String, dynamic> json) =>
     _$HealthCategoryImpl(
       categoryId: (json['categoryId'] as num).toInt(),
-      name: json['name'] as String,
+      displayName: json['displayName'] as String,
       parentCategoryId: (json['parentCategoryId'] as num?)?.toInt(),
-      description: json['description'] as String?,
-      hierarchyLevel: (json['hierarchyLevel'] as num).toInt(),
-      categoryPath: json['categoryPath'] as String?,
-      createdAt:
-          json['createdAt'] == null
-              ? null
-              : DateTime.parse(json['createdAt'] as String),
+      level: (json['level'] as num).toInt(),
+      isLeaf: json['isLeaf'] as bool,
     );
 
 Map<String, dynamic> _$$HealthCategoryImplToJson(
   _$HealthCategoryImpl instance,
 ) => <String, dynamic>{
   'categoryId': instance.categoryId,
-  'name': instance.name,
+  'displayName': instance.displayName,
   'parentCategoryId': instance.parentCategoryId,
-  'description': instance.description,
-  'hierarchyLevel': instance.hierarchyLevel,
-  'categoryPath': instance.categoryPath,
-  'createdAt': instance.createdAt?.toIso8601String(),
+  'level': instance.level,
+  'isLeaf': instance.isLeaf,
 };

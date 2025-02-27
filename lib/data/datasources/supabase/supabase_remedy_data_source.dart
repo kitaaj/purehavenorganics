@@ -2,17 +2,26 @@ import 'package:purehavenorganics/core/errors/exceptions.dart';
 import 'package:purehavenorganics/core/services/supabase_service.dart';
 import 'package:purehavenorganics/core/utils/parse_array.dart';
 import 'package:purehavenorganics/core/utils/parse_jsonb.dart';
+import 'package:purehavenorganics/domain/entities/active_component.dart';
 import 'package:purehavenorganics/domain/entities/category_path.dart';
 import 'package:purehavenorganics/domain/entities/condition.dart';
+import 'package:purehavenorganics/domain/entities/condition_search_result.dart';
+import 'package:purehavenorganics/domain/entities/condition_treated.dart';
+import 'package:purehavenorganics/domain/entities/effectiveness_stats.dart';
+import 'package:purehavenorganics/domain/entities/featured_remedy.dart';
 import 'package:purehavenorganics/domain/entities/health_category.dart';
 import 'package:purehavenorganics/domain/entities/related_condition.dart';
 import 'package:purehavenorganics/domain/entities/related_remedy.dart';
+import 'package:purehavenorganics/domain/entities/remedies_by_category.dart';
+import 'package:purehavenorganics/domain/entities/remedies_for_condition.dart';
 import 'package:purehavenorganics/domain/entities/remedy.dart';
 import 'package:purehavenorganics/domain/entities/remedy_category.dart';
 import 'package:purehavenorganics/domain/entities/remedy_combination.dart';
 import 'package:purehavenorganics/domain/entities/remedy_condition.dart';
+import 'package:purehavenorganics/domain/entities/remedy_details.dart';
 import 'package:purehavenorganics/domain/entities/search_suggestion.dart';
 import 'package:purehavenorganics/domain/entities/symptom_search_result.dart';
+import 'package:purehavenorganics/domain/entities/usage_instructions.dart';
 import 'package:purehavenorganics/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -83,7 +92,7 @@ class SupabaseRemedyDataSource {
               medicalSupervisionRequired:
                   item['medical_supervision_required'] ?? false,
               complementToMedication: item['complement_to_medication'],
-              tags: parseJsonb(item['tags']),
+              tags: parseArray(item['tags']),
               conditions: parseArray<int>(item['conditions']),
             ),
           )
@@ -135,7 +144,7 @@ class SupabaseRemedyDataSource {
     }
   }
 
-  Future<List<RemedyCategory>> getCategories() async {
+  Future<List<RemedyCategory>> getRemedyCategories() async {
     try {
       final response = await _client
           .from('remedy_categories')
@@ -143,7 +152,12 @@ class SupabaseRemedyDataSource {
           .order('category_name');
 
       return (response as List)
-          .map((json) => RemedyCategory.fromJson(json))
+          .map(
+            (json) => RemedyCategory(
+              categoryId: json['category_id'],
+              categoryName: json['category_name'],
+            ),
+          )
           .toList();
     } catch (e) {
       throw RemedyException('Failed to fetch categories: $e');
@@ -151,13 +165,24 @@ class SupabaseRemedyDataSource {
   }
 
   // Category Operations
-  Future<List<Remedy>> getRemediesByCategory(String categoryName) async {
+  Future<List<RemediesByCategory>> getRemediesByCategory(
+    String categoryName,
+  ) async {
     try {
       final response = await rpc(
         'get_remedies_by_category',
         params: {'p_category_name': categoryName},
       );
-      return (response as List).map((json) => Remedy.fromJson(json)).toList();
+      return (response as List)
+          .map(
+            (json) => RemediesByCategory(
+              remedyName: json['remedy_name'],
+              commonNames: parseArray(json['common_names']),
+              primaryUses: parseArray(json['primary_uses']),
+              scientificName: json['scientific_name'],
+            ),
+          )
+          .toList();
     } catch (e) {
       throw RemedyException('Failed to fetch remedies by category: $e');
     }
@@ -201,7 +226,14 @@ class SupabaseRemedyDataSource {
         params: {'p_condition_name': conditionName},
       );
       return (response as List)
-          .map((json) => RelatedCondition.fromJson(json))
+          .map(
+            (json) => RelatedCondition(
+              relatedCondition: json['related_condition'],
+              relationshipType: json['relationship_type'],
+              relationshipStrength: json['relationship_strength'],
+              relationshipDescription: json['relationship_description'],
+            ),
+          )
           .toList();
     } catch (e) {
       throw RemedyException('Failed to fetch related conditions: $e');
@@ -235,7 +267,7 @@ class SupabaseRemedyDataSource {
               conditionId: item['condition_id'],
               name: item['name'],
               description: item['description'],
-              symptoms: List<String>.from(item['symptoms'] ?? []),
+              symptoms: parseArray(item['symptoms']),
             ),
           )
           .toList();
@@ -281,7 +313,15 @@ class SupabaseRemedyDataSource {
         },
       );
       return (response as List)
-          .map((json) => SearchSuggestion.fromJson(json))
+          .map(
+            (json) => SearchSuggestion(
+              suggestion: json['suggestion'],
+              suggestionType: json['type_name'],
+              category: json['category'],
+              relevanceScore: (json['relevance_score'] as num).toDouble(),
+              additionalInfo: parseJsonb(json['additional_info']),
+            ),
+          )
           .toList();
     } catch (e) {
       throw RemedyException('Failed to get search suggestions: $e');
@@ -307,7 +347,7 @@ class SupabaseRemedyDataSource {
   }
 
   // Featured and Recommendations
-  Future<List<Remedy>> getFeaturedRemedies({
+  Future<List<FeaturedRemedy>> getFeaturedRemedies({
     int limitCount = 5,
     String? categoryFilter,
   }) async {
@@ -316,8 +356,19 @@ class SupabaseRemedyDataSource {
         'get_featured_remedies',
         params: {'limit_count': limitCount, 'category_filter': categoryFilter},
       );
-      return (response as List).map((json) => Remedy.fromJson(json)).toList();
+      if (response == null) return [];
+      return (response as List)
+          .map(
+            (item) => FeaturedRemedy(
+              remedyName: item['remedy_name'],
+              categoryName: item['category_name'],
+              primaryUses: parseArray(item['primary_uses']),
+              effectivenessScore: item['effectiveness_score'],
+            ),
+          )
+          .toList();
     } catch (e) {
+      e.log();
       throw RemedyException('Failed to fetch featured remedies: $e');
     }
   }
@@ -379,29 +430,30 @@ class SupabaseRemedyDataSource {
     }
   }
 
- Future<List<SymptomSearchResult>> searchBySymptoms({
+  Future<List<SymptomSearchResult>> searchBySymptoms({
     required List<String> symptoms,
     int matchThreshold = 1,
   }) async {
     try {
       final response = await _client.rpc(
         'search_by_symptoms',
-        params: {
-          'symptom_list': symptoms,
-          'match_threshold': matchThreshold,
-        },
+        params: {'symptom_list': symptoms, 'match_threshold': matchThreshold},
       );
 
       ('Supabase searchBySymptoms response: $response').log();
 
       if (response == null) return [];
 
-      return (response as List).map((item) => SymptomSearchResult(
-        conditionName: item['condition_name'],
-        matchingSymptoms: parseArray(item['matching_symptoms']),
-        matchCount: item['match_count'],
-        recommendedRemedies: parseJsonb(['recommended_remedies']) ?? {},
-      )).toList();
+      return (response as List)
+          .map(
+            (item) => SymptomSearchResult(
+              conditionName: item['condition_name'],
+              matchingSymptoms: parseArray(item['matching_symptoms']),
+              matchCount: item['match_count'],
+              recommendedRemedies: parseJsonb(['recommended_remedies']) ?? {},
+            ),
+          )
+          .toList();
     } catch (e, stackTrace) {
       ('Error in searchBySymptoms: $e\nStackTrace: $stackTrace').log();
       throw RemedyException('Failed to search by symptoms: $e');
@@ -422,6 +474,140 @@ class SupabaseRemedyDataSource {
           .toList();
     } catch (e) {
       throw RemedyException('Failed to fetch trending searches: $e');
+    }
+  }
+
+  Future<List<ConditionSearchResult>> searchConditions({
+    String? searchTerm,
+    int? minRemedies,
+    double? minEffectiveness,
+    int limit = 10,
+    int offset = 0,
+  }) async {
+    try {
+      final response = await rpc(
+        'search_conditions',
+        params: {
+          'search_term': searchTerm,
+          'min_remedies': minRemedies,
+          'min_effectiveness': minEffectiveness,
+          'limit_count': limit,
+          'offset_count': offset,
+        },
+      );
+      if (response == null) return [];
+      return (response as List)
+          .map(
+            (json) => ConditionSearchResult(
+              conditionName: json['condition_name'],
+              conditionDescription: json['condition_description'],
+              symptoms: parseArray(json['symptoms']),
+              remedyCount: json['remedy_count'],
+              avgEffectiveness: json['avg_effectiveness'],
+              topRemedies: parseJsonb(json['top_remedies']) ?? {},
+            ),
+          )
+          .toList();
+    } catch (e) {
+      throw RemedyException('Failed to search conditions: $e');
+    }
+  }
+
+  Future<List<HealthCategory>> getCategories() async {
+    try {
+      final response = await rpc('get_health_categories_formatted');
+      if (response == null) return [];
+
+      return (response as List)
+          .map(
+            (item) => HealthCategory(
+              categoryId: item['category_id'],
+              displayName: item['display_name'],
+              level: item['level'],
+              isLeaf: item['is_leaf'],
+            ),
+          )
+          .toList();
+    } catch (e) {
+      throw RemedyException('Failed to fetch health categories: $e');
+    }
+  }
+
+  Future<RemedyDetails> getRemedyDetails(String remedyName) async {
+    try {
+      final response = await rpc(
+        'get_remedy_details',
+        params: {'p_remedy_name': remedyName},
+      );
+
+       if (response == null || response.isEmpty) {
+      throw RemedyException('No details found for remedy: $remedyName');
+    }
+
+      final remedyData = response[0];
+      ('Raw remedy data: $remedyData').log();
+
+      return RemedyDetails(
+        remedyName: remedyData['remedy_name'],
+        scientificName: remedyData['scientific_name'],
+        categoryName: remedyData['category_name'],
+        commonNames: parseArray(remedyData['common_names']),
+        activeComponents:
+            (remedyData['active_components'] as List?)
+                ?.map(
+                  (e) => ActiveComponent.fromJson(e as Map<String, dynamic>),
+                )
+                .toList() ??
+            [],
+        preparationMethods: List<String>.from(
+          remedyData['preparation_methods'] ?? [],
+        ),
+         conditionsTreated: (remedyData['conditions_treated'] as List?)
+          ?.map((e) {
+            final map = Map<String, dynamic>.from(e);
+            if (map['effectiveness'] != null) {
+              map['effectiveness'] = (map['effectiveness'] as num).toInt();
+            }
+            return ConditionTreated.fromJson(map);
+          })
+          .toList() ?? [],
+        effectivenessStats: EffectivenessStats.fromJson(
+          remedyData['effectiveness_stats'] as Map<String, dynamic>,
+        ),
+        usageInstructions: UsageInstructions.fromJson(
+          remedyData['usage_instructions'] as Map<String, dynamic>,
+        ),
+      );
+    } catch (e,ee) {
+      throw RemedyException('Failed to fetch remedy details: $e\n$ee');
+    }
+  }
+
+  Future<List<RemediesForCondition>> getRemediesForCondition({
+    required String conditionName,
+    int minEffectiveness = 3,
+  }) async {
+    try {
+      final response = await rpc(
+        'get_remedies_for_condition',
+        params: {
+          'condition_name': conditionName,
+          'min_effectiveness': minEffectiveness,
+        },
+      );
+      return (response as List)
+          .map(
+            (json) => RemediesForCondition(
+              remedyName: json['remedy_name'],
+              preparationMethods: parseArray(json['preparation_methods']),
+              scientificName: json['scientific_name'],
+              categoryName: json['category_name'],
+              effectivenessRating: (json['effectiveness_rating']),
+            ),
+          )
+          .toList();
+    } catch (e) {
+      throw RemedyException('Failed to fetch remedies for condition: $e');
     }
   }
 }

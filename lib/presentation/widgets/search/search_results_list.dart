@@ -11,7 +11,7 @@ class SearchResultsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     if (results.remedies.isNotEmpty) {
+    if (results.remedies.isNotEmpty) {
       return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -30,7 +30,16 @@ class SearchResultsList extends StatelessWidget {
         itemCount: results.symptomResults.length,
         itemBuilder: (context, index) {
           final result = results.symptomResults[index];
-          return SymptomResultCard(result: result);
+          return SymptomCard(
+            result: result,
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/condition-detail',
+                arguments: result.conditionName,
+              );
+            },
+          );
         },
       );
     }

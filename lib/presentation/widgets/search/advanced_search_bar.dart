@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:purehavenorganics/core/utils/search_type_enums.dart';
-import 'package:purehavenorganics/domain/entities/search.dart';
-import 'package:purehavenorganics/presentation/providers/search_providers.dart';
-import 'package:purehavenorganics/presentation/widgets/search/search_results_list.dart';
+import 'package:purehavenorganics/core/utils/get_icon_for_type.dart';
+import 'package:purehavenorganics/domain/entities/search_suggestion.dart';
+import 'package:purehavenorganics/main.dart';
+import 'package:purehavenorganics/presentation/providers/providers.dart';
 
 class AdvancedSearchBar extends ConsumerStatefulWidget {
   const AdvancedSearchBar({super.key});
@@ -13,79 +13,120 @@ class AdvancedSearchBar extends ConsumerStatefulWidget {
 }
 
 class _AdvancedSearchBarState extends ConsumerState<AdvancedSearchBar> {
-  late TextEditingController _controller;
-  SearchType _currentType = SearchType.remedy;
+  late SearchController _searchController;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final searchController = ref.watch(searchControllerProvider);
-    
-    return Column(
-      mainAxisSize: MainAxisSize.min, // Important to prevent expansion
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: SearchBar(
-                controller: _controller,
-                hintText: 'Search remedies, conditions, or symptoms...',
-                onChanged: searchController.updateSearchTerm,
-              ),
-            ),
-            PopupMenuButton<SearchType>(
-              initialValue: _currentType,
-              onSelected: (type) {
-                setState(() => _currentType = type);
-                searchController.updateSearchType(type);
-              },
-              itemBuilder: (context) => SearchType.values
-                  .map((type) => PopupMenuItem(
-                        value: type,
-                        child: Text(type.name),
-                      ))
-                  .toList(),
-            ),
-          ],
-        ),
-        // Show search results in a constrained box
-        StreamBuilder<SearchResults>(
-          stream: searchController.searchResults,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return const SizedBox();
-            
-            final results = snapshot.data!;
-            if (results.errorMessage != null) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  results.errorMessage!,
-                  style: TextStyle(color: Theme.of(context).colorScheme.error),
-                ),
-              );
-            }
-
-            // Constrain the height of search results
-            return ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 300),
-              child: SingleChildScrollView(
-                child: SearchResultsList(results: results),
-              ),
-            );
-          },
-        ),
-      ],
-    );
+    _searchController = SearchController();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _searchController.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SearchAnchor.bar(
+      searchController: _searchController,
+      barHintText: 'Search remedies, conditions, or symptoms...',
+      barLeading: const Icon(Icons.search),
+      viewTrailing: [
+        IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: () {
+            _searchController.clear();
+          },
+        ),
+      ],
+      viewHintText: 'Search remedies, conditions, or symptoms...',
+      viewLeading: const Icon(Icons.search),
+      suggestionsBuilder: (
+        BuildContext context,
+        SearchController controller,
+      ) async {
+        if (controller.text.isEmpty) {
+          return const [];
+        }
+
+        try {
+          final suggestions = await ref.read(
+            searchSuggestionsProvider(controller.text).future,
+          );
+
+          return suggestions.map((suggestion) {
+            return ListTile(
+              leading: Icon(getIconForType(suggestion.suggestionType)),
+              title: Text(suggestion.suggestion),
+              subtitle:
+                  suggestion.category != null
+                      ? Text(suggestion.category!)
+                      : null,
+              trailing: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '${(suggestion.relevanceScore * 100).round()}%',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                ),
+              ),
+              onTap: () {
+                controller.closeView(suggestion.suggestion);
+                _navigateToResult(context, suggestion);
+              },
+            );
+          }).toList();
+        } catch (e) {
+          ('Error fetching suggestions: $e').log();
+          return [
+            ListTile(
+              title: Text('Error fetching suggestions'),
+              subtitle: Text(e.toString()),
+            ),
+          ];
+        }
+      },
+    );
+  }
+
+  void _navigateToResult(BuildContext context, SearchSuggestion suggestion) {
+    final additionalInfo = suggestion.additionalInfo;
+    switch (suggestion.suggestionType.toLowerCase()) {
+      case 'remedy':
+        Navigator.pushNamed(
+          context,
+          '/remedy-detail',
+          arguments: suggestion.suggestion,
+        );
+        break;
+      case 'common_name':
+        Navigator.pushNamed(
+          context,
+          '/remedy-detail',
+          arguments: additionalInfo!['remedy_name'],
+        );
+        break;
+      case 'condition':
+        Navigator.pushNamed(
+          context,
+          '/condition-detail',
+          arguments: suggestion.suggestion,
+        );
+        break;
+      case 'symptom':
+        Navigator.pushNamed(
+          context,
+          '/symptom-search',
+          arguments: suggestion.suggestion,
+        );
+        break;
+    }
   }
 }

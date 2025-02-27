@@ -3,12 +3,18 @@ import 'package:purehavenorganics/core/utils/retry_helper.dart';
 import 'package:purehavenorganics/data/datasources/supabase/supabase_remedy_data_source.dart';
 import 'package:purehavenorganics/domain/entities/category_path.dart';
 import 'package:purehavenorganics/domain/entities/condition.dart';
+import 'package:purehavenorganics/domain/entities/condition_search_result.dart';
+import 'package:purehavenorganics/domain/entities/featured_remedy.dart';
 import 'package:purehavenorganics/domain/entities/health_category.dart';
 import 'package:purehavenorganics/domain/entities/related_condition.dart';
 import 'package:purehavenorganics/domain/entities/related_remedy.dart';
+import 'package:purehavenorganics/domain/entities/remedies_by_category.dart';
+import 'package:purehavenorganics/domain/entities/remedies_for_condition.dart';
 import 'package:purehavenorganics/domain/entities/remedy.dart';
+import 'package:purehavenorganics/domain/entities/remedy_category.dart';
 import 'package:purehavenorganics/domain/entities/remedy_combination.dart';
 import 'package:purehavenorganics/domain/entities/remedy_condition.dart';
+import 'package:purehavenorganics/domain/entities/remedy_details.dart';
 import 'package:purehavenorganics/domain/entities/search_params.dart';
 import 'package:purehavenorganics/domain/entities/search_suggestion.dart';
 import 'package:purehavenorganics/domain/entities/symptom_search_result.dart';
@@ -168,7 +174,7 @@ class RemedyRepositoryImpl implements RemedyRepository {
   }
 
   @override
-  Future<List<Remedy>> getFeaturedRemedies({
+  Future<List<FeaturedRemedy>> getFeaturedRemedies({
     int limit = 5,
     String? categoryFilter,
   }) async {
@@ -205,32 +211,22 @@ class RemedyRepositoryImpl implements RemedyRepository {
     String conditionName,
   ) async {
     try {
-      final response = await _dataSource.rpc(
-        'get_related_conditions',
-        params: {'p_condition_name': conditionName},
-      );
-      return (response as List)
-          .map((json) => RelatedCondition.fromJson(json))
-          .toList();
+      return await _dataSource.getRelatedConditions(conditionName);
     } catch (e) {
       throw RemedyException('Failed to fetch related conditions: $e');
     }
   }
 
   @override
-  Future<List<Remedy>> getRemediesForCondition({
+  Future<List<RemediesForCondition>> getRemediesForCondition({
     required String conditionName,
     int minEffectiveness = 3,
   }) async {
     try {
-      final response = await _dataSource.rpc(
-        'get_remedies_for_condition',
-        params: {
-          'condition_name': conditionName,
-          'min_effectiveness': minEffectiveness,
-        },
+      return await _dataSource.getRemediesForCondition(
+        conditionName: conditionName,
+        minEffectiveness: minEffectiveness,
       );
-      return (response as List).map((json) => Remedy.fromJson(json)).toList();
     } catch (e) {
       throw RemedyException('Failed to fetch remedies for condition: $e');
     }
@@ -313,6 +309,64 @@ class RemedyRepositoryImpl implements RemedyRepository {
       return await _dataSource.getConditions(searchTerm: searchTerm);
     } catch (e) {
       throw RemedyException('Failed to fetch conditions: $e');
+    }
+  }
+
+  @override
+  Future<List<RemediesByCategory>> getRemediesByCategory(String categoryName) async {
+    try {
+      return await _dataSource.getRemediesByCategory(categoryName);
+    } catch (e) {
+      throw RemedyException('Failed to fetch remedies by category: $e');
+    }
+  }
+
+  @override
+  Future<List<ConditionSearchResult>> searchConditions({
+    String? searchTerm,
+    int? minRemedies,
+    double? minEffectiveness,
+    int limit = 10,
+    int offset = 0,
+  }) async {
+    try {
+      return _dataSource.searchConditions(
+        searchTerm: searchTerm,
+        minRemedies: minRemedies,
+        minEffectiveness: minEffectiveness,
+        limit: limit,
+        offset: offset,
+      );
+    } catch (e) {
+      throw RemedyException('Failed to search conditions: $e');
+    }
+  }
+
+  @override
+  Future<List<HealthCategory>> getCategories() async {
+    try {
+      return await _dataSource.getCategories();
+    } catch (e) {
+      throw RemedyException('Failed to fetch health categories: $e');
+    }
+  }
+
+  @override
+  Future<List<RemedyCategory>> getRemedyCategories() async {
+    try {
+      return await _dataSource.getRemedyCategories();
+    } catch (e) {
+      throw RemedyException('Failed to fetch remedy categories: $e');
+    }
+  }
+
+  @override
+  Future<RemedyDetails> getRemedyDetails(String remedyName) async {
+    try {
+      return await _dataSource.getRemedyDetails(remedyName);
+    } catch (e, stack) {
+      stack.log();
+      throw RemedyException('Failed to fetch remedy details: $e');
     }
   }
 }

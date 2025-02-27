@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:purehavenorganics/core/config/route_config.dart';
+import 'package:purehavenorganics/core/config/app_router.dart';
 import 'package:purehavenorganics/core/providers/core_providers.dart';
-import 'package:purehavenorganics/presentation/screens/remedy_list_screen.dart';
 import 'package:purehavenorganics/presentation/theme/app_theme.dart';
 
 class NaturalRemediesApp extends ConsumerWidget {
@@ -11,7 +10,7 @@ class NaturalRemediesApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
-    
+
     return MaterialApp(
       title: 'Natural Remedies',
       debugShowCheckedModeBanner: false,
@@ -19,7 +18,7 @@ class NaturalRemediesApp extends ConsumerWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      home: const RemedyListScreen(),
+      initialRoute: AppRoutes.root,
     );
   }
 }

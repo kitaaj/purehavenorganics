@@ -50,7 +50,7 @@ mixin _$Remedy {
   List<String>? get notSuitableFor => throw _privateConstructorUsedError;
   bool get medicalSupervisionRequired => throw _privateConstructorUsedError;
   String? get complementToMedication => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get tags => throw _privateConstructorUsedError;
+  List<String>? get tags => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   List<int> get conditions => throw _privateConstructorUsedError;
@@ -98,7 +98,7 @@ abstract class $RemedyCopyWith<$Res> {
     List<String>? notSuitableFor,
     bool medicalSupervisionRequired,
     String? complementToMedication,
-    Map<String, dynamic>? tags,
+    List<String>? tags,
     DateTime? createdAt,
     DateTime? updatedAt,
     List<int> conditions,
@@ -299,7 +299,7 @@ class _$RemedyCopyWithImpl<$Res, $Val extends Remedy>
                 freezed == tags
                     ? _value.tags
                     : tags // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
+                        as List<String>?,
             createdAt:
                 freezed == createdAt
                     ? _value.createdAt
@@ -358,7 +358,7 @@ abstract class _$$RemedyImplCopyWith<$Res> implements $RemedyCopyWith<$Res> {
     List<String>? notSuitableFor,
     bool medicalSupervisionRequired,
     String? complementToMedication,
-    Map<String, dynamic>? tags,
+    List<String>? tags,
     DateTime? createdAt,
     DateTime? updatedAt,
     List<int> conditions,
@@ -558,7 +558,7 @@ class __$$RemedyImplCopyWithImpl<$Res>
             freezed == tags
                 ? _value._tags
                 : tags // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
+                    as List<String>?,
         createdAt:
             freezed == createdAt
                 ? _value.createdAt
@@ -611,7 +611,7 @@ class _$RemedyImpl implements _Remedy {
     final List<String>? notSuitableFor,
     this.medicalSupervisionRequired = false,
     this.complementToMedication,
-    final Map<String, dynamic>? tags,
+    final List<String>? tags,
     this.createdAt,
     this.updatedAt,
     final List<int> conditions = const [],
@@ -780,14 +780,14 @@ class _$RemedyImpl implements _Remedy {
   final bool medicalSupervisionRequired;
   @override
   final String? complementToMedication;
-  final Map<String, dynamic>? _tags;
+  final List<String>? _tags;
   @override
-  Map<String, dynamic>? get tags {
+  List<String>? get tags {
     final value = _tags;
     if (value == null) return null;
-    if (_tags is EqualUnmodifiableMapView) return _tags;
+    if (_tags is EqualUnmodifiableListView) return _tags;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -985,7 +985,7 @@ abstract class _Remedy implements Remedy {
     final List<String>? notSuitableFor,
     final bool medicalSupervisionRequired,
     final String? complementToMedication,
-    final Map<String, dynamic>? tags,
+    final List<String>? tags,
     final DateTime? createdAt,
     final DateTime? updatedAt,
     final List<int> conditions,
@@ -1050,7 +1050,7 @@ abstract class _Remedy implements Remedy {
   @override
   String? get complementToMedication;
   @override
-  Map<String, dynamic>? get tags;
+  List<String>? get tags;
   @override
   DateTime? get createdAt;
   @override

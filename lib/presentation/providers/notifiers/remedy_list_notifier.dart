@@ -25,9 +25,7 @@ class RemedyListNotifier extends StateNotifier<AsyncValue<List<Remedy>>> {
 
     final currentData = state.value ?? [];
     try {
-      final newParams = _currentParams.copyWith(
-        page: currentData.length,
-      );
+      final newParams = _currentParams.copyWith(page: currentData.length);
       final moreRemedies = await _repository.getRemedies(params: newParams);
       state = AsyncValue.data([...currentData, ...moreRemedies]);
       _currentParams = newParams;

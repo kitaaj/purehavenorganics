@@ -6,8 +6,6 @@ import 'package:purehavenorganics/domain/entities/symptom_search_result.dart';
 part 'search.freezed.dart';
 part 'search.g.dart';
 
-
-
 @freezed
 class SearchResults with _$SearchResults {
   const factory SearchResults({
@@ -17,11 +15,11 @@ class SearchResults with _$SearchResults {
     String? errorMessage,
   }) = _SearchResults;
 
-  factory SearchResults.fromJson(Map<String, dynamic> json) => 
+  factory SearchResults.fromJson(Map<String, dynamic> json) =>
       _$SearchResultsFromJson(json);
 
   factory SearchResults.empty() => const SearchResults();
-  
-  factory SearchResults.error(String message) => 
+
+  factory SearchResults.error(String message) =>
       SearchResults(errorMessage: message);
 }

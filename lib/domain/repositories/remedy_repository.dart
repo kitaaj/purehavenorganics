@@ -1,11 +1,17 @@
 import 'package:purehavenorganics/domain/entities/category_path.dart';
 import 'package:purehavenorganics/domain/entities/condition.dart';
+import 'package:purehavenorganics/domain/entities/condition_search_result.dart';
+import 'package:purehavenorganics/domain/entities/featured_remedy.dart';
 import 'package:purehavenorganics/domain/entities/health_category.dart';
 import 'package:purehavenorganics/domain/entities/related_condition.dart';
 import 'package:purehavenorganics/domain/entities/related_remedy.dart';
+import 'package:purehavenorganics/domain/entities/remedies_by_category.dart';
+import 'package:purehavenorganics/domain/entities/remedies_for_condition.dart';
 import 'package:purehavenorganics/domain/entities/remedy.dart';
+import 'package:purehavenorganics/domain/entities/remedy_category.dart';
 import 'package:purehavenorganics/domain/entities/remedy_combination.dart';
 import 'package:purehavenorganics/domain/entities/remedy_condition.dart';
+import 'package:purehavenorganics/domain/entities/remedy_details.dart';
 import 'package:purehavenorganics/domain/entities/search_params.dart';
 import 'package:purehavenorganics/domain/entities/search_suggestion.dart';
 import 'package:purehavenorganics/domain/entities/symptom_search_result.dart';
@@ -44,7 +50,7 @@ abstract class RemedyRepository {
   // Condition operations
   Future<List<RemedyCondition>> getRemedyConditions(String remedyName);
   Future<List<RelatedCondition>> getRelatedConditions(String conditionName);
-  Future<List<Remedy>> getRemediesForCondition({
+  Future<List<RemediesForCondition>> getRemediesForCondition({
     required String conditionName,
     int minEffectiveness = 3,
   });
@@ -70,7 +76,7 @@ abstract class RemedyRepository {
   });
 
   // Featured and recommendations
-  Future<List<Remedy>> getFeaturedRemedies({
+  Future<List<FeaturedRemedy>> getFeaturedRemedies({
     int limit = 5,
     String? categoryFilter,
   });
@@ -79,4 +85,19 @@ abstract class RemedyRepository {
     int daysBack = 7,
     int limit = 10,
   });
+
+  Future<List<RemediesByCategory>> getRemediesByCategory(String categoryName);
+
+  // Future<List<Condition>> searchConditions(String query);
+  Future<List<HealthCategory>> getCategories();
+  Future<List<RemedyCategory>> getRemedyCategories();
+  Future<List<ConditionSearchResult>> searchConditions({
+    String? searchTerm,
+    int? minRemedies,
+    double? minEffectiveness,
+    int limit = 10,
+    int offset = 0,
+  });
+
+  Future<RemedyDetails> getRemedyDetails(String remedyName);
 }

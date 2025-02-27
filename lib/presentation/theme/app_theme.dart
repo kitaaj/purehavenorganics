@@ -8,7 +8,11 @@ class AppTheme {
         seedColor: Colors.green,
         brightness: Brightness.light,
       ),
-      chipTheme: ChipThemeData(shape: StadiumBorder()),
+      chipTheme: ChipThemeData(
+        shape: StadiumBorder(),
+        padding: EdgeInsets.all(0.0),
+        labelPadding: EdgeInsets.symmetric(horizontal: 8.0, vertical: -4.0),
+      ),
     );
   }
 
@@ -19,7 +23,11 @@ class AppTheme {
         seedColor: Colors.green,
         brightness: Brightness.dark,
       ),
-      chipTheme: ChipThemeData(shape: StadiumBorder()),
+      chipTheme: ChipThemeData(
+        shape: StadiumBorder(),
+        padding: EdgeInsets.all(0.0),
+        labelPadding: EdgeInsets.symmetric(horizontal: 6.0, vertical: -2.0),
+      ),
     );
   }
 }

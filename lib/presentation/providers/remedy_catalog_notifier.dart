@@ -36,7 +36,7 @@ class RemedyCatalogNotifier extends StateNotifier<AsyncValue<List<Remedy>>> {
     await _loadRemedies();
   }
 
-    Future<void> search(String? term) async {
+  Future<void> search(String? term) async {
     _currentParams = _currentParams.copyWith(
       searchTerm: term,
       page: 1, // Reset to first page when searching
@@ -44,7 +44,7 @@ class RemedyCatalogNotifier extends StateNotifier<AsyncValue<List<Remedy>>> {
     await _loadRemedies();
   }
 
-    Future<void> filterByCategory(int? categoryId) async {
+  Future<void> filterByCategory(int? categoryId) async {
     _currentParams = _currentParams.copyWith(
       categoryId: categoryId,
       page: 1, // Reset to first page when filtering

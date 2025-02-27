@@ -34,7 +34,7 @@ class Remedy with _$Remedy {
     List<String>? notSuitableFor,
     @Default(false) bool medicalSupervisionRequired,
     String? complementToMedication,
-    Map<String, dynamic>? tags,
+    List<String>? tags,
     DateTime? createdAt,
     DateTime? updatedAt,
     @Default([]) List<int> conditions,

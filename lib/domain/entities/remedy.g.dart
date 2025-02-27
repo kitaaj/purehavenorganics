@@ -60,7 +60,7 @@ _$RemedyImpl _$$RemedyImplFromJson(Map<String, dynamic> json) => _$RemedyImpl(
   medicalSupervisionRequired:
       json['medicalSupervisionRequired'] as bool? ?? false,
   complementToMedication: json['complementToMedication'] as String?,
-  tags: json['tags'] as Map<String, dynamic>?,
+  tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
   createdAt:
       json['createdAt'] == null
           ? null
