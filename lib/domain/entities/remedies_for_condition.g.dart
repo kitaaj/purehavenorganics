@@ -17,6 +17,7 @@ _$RemediesForConditionImpl _$$RemediesForConditionImplFromJson(
       (json['preparationMethods'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+  imgUrl: json['imgUrl'] as String?,
 );
 
 Map<String, dynamic> _$$RemediesForConditionImplToJson(
@@ -27,4 +28,5 @@ Map<String, dynamic> _$$RemediesForConditionImplToJson(
   'categoryName': instance.categoryName,
   'effectivenessRating': instance.effectivenessRating,
   'preparationMethods': instance.preparationMethods,
+  'imgUrl': instance.imgUrl,
 };

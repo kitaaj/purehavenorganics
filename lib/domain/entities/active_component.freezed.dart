@@ -21,7 +21,9 @@ ActiveComponent _$ActiveComponentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ActiveComponent {
+  @HiveField(0)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(1)
   List<String> get effect => throw _privateConstructorUsedError;
 
   /// Serializes this ActiveComponent to a JSON map.
@@ -41,7 +43,7 @@ abstract class $ActiveComponentCopyWith<$Res> {
     $Res Function(ActiveComponent) then,
   ) = _$ActiveComponentCopyWithImpl<$Res, ActiveComponent>;
   @useResult
-  $Res call({String name, List<String> effect});
+  $Res call({@HiveField(0) String name, @HiveField(1) List<String> effect});
 }
 
 /// @nodoc
@@ -86,7 +88,7 @@ abstract class _$$ActiveComponentImplCopyWith<$Res>
   ) = __$$ActiveComponentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, List<String> effect});
+  $Res call({@HiveField(0) String name, @HiveField(1) List<String> effect});
 }
 
 /// @nodoc
@@ -124,17 +126,19 @@ class __$$ActiveComponentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ActiveComponentImpl implements _ActiveComponent {
   const _$ActiveComponentImpl({
-    required this.name,
-    required final List<String> effect,
+    @HiveField(0) required this.name,
+    @HiveField(1) required final List<String> effect,
   }) : _effect = effect;
 
   factory _$ActiveComponentImpl.fromJson(Map<String, dynamic> json) =>
       _$$ActiveComponentImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String name;
   final List<String> _effect;
   @override
+  @HiveField(1)
   List<String> get effect {
     if (_effect is EqualUnmodifiableListView) return _effect;
     // ignore: implicit_dynamic_type
@@ -182,16 +186,18 @@ class _$ActiveComponentImpl implements _ActiveComponent {
 
 abstract class _ActiveComponent implements ActiveComponent {
   const factory _ActiveComponent({
-    required final String name,
-    required final List<String> effect,
+    @HiveField(0) required final String name,
+    @HiveField(1) required final List<String> effect,
   }) = _$ActiveComponentImpl;
 
   factory _ActiveComponent.fromJson(Map<String, dynamic> json) =
       _$ActiveComponentImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get name;
   @override
+  @HiveField(1)
   List<String> get effect;
 
   /// Create a copy of ActiveComponent

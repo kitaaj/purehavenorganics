@@ -7,7 +7,7 @@ class RemedyListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final remediesAsync = ref.watch(remedyListProvider);
+    final remediesAsync = ref.watch(allRemediesProvider);
 
     return Scaffold(
       appBar: AppBar(

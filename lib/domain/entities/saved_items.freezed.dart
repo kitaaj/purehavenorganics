@@ -21,7 +21,9 @@ SavedItems _$SavedItemsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SavedItems {
+  @HiveField(0)
   List<Remedy> get remedies => throw _privateConstructorUsedError;
+  @HiveField(1)
   List<Condition> get conditions => throw _privateConstructorUsedError;
 
   /// Serializes this SavedItems to a JSON map.
@@ -41,7 +43,10 @@ abstract class $SavedItemsCopyWith<$Res> {
     $Res Function(SavedItems) then,
   ) = _$SavedItemsCopyWithImpl<$Res, SavedItems>;
   @useResult
-  $Res call({List<Remedy> remedies, List<Condition> conditions});
+  $Res call({
+    @HiveField(0) List<Remedy> remedies,
+    @HiveField(1) List<Condition> conditions,
+  });
 }
 
 /// @nodoc
@@ -86,7 +91,10 @@ abstract class _$$SavedItemsImplCopyWith<$Res>
   ) = __$$SavedItemsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Remedy> remedies, List<Condition> conditions});
+  $Res call({
+    @HiveField(0) List<Remedy> remedies,
+    @HiveField(1) List<Condition> conditions,
+  });
 }
 
 /// @nodoc
@@ -124,8 +132,8 @@ class __$$SavedItemsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SavedItemsImpl implements _SavedItems {
   const _$SavedItemsImpl({
-    final List<Remedy> remedies = const [],
-    final List<Condition> conditions = const [],
+    @HiveField(0) final List<Remedy> remedies = const [],
+    @HiveField(1) final List<Condition> conditions = const [],
   }) : _remedies = remedies,
        _conditions = conditions;
 
@@ -135,6 +143,7 @@ class _$SavedItemsImpl implements _SavedItems {
   final List<Remedy> _remedies;
   @override
   @JsonKey()
+  @HiveField(0)
   List<Remedy> get remedies {
     if (_remedies is EqualUnmodifiableListView) return _remedies;
     // ignore: implicit_dynamic_type
@@ -144,6 +153,7 @@ class _$SavedItemsImpl implements _SavedItems {
   final List<Condition> _conditions;
   @override
   @JsonKey()
+  @HiveField(1)
   List<Condition> get conditions {
     if (_conditions is EqualUnmodifiableListView) return _conditions;
     // ignore: implicit_dynamic_type
@@ -191,16 +201,18 @@ class _$SavedItemsImpl implements _SavedItems {
 
 abstract class _SavedItems implements SavedItems {
   const factory _SavedItems({
-    final List<Remedy> remedies,
-    final List<Condition> conditions,
+    @HiveField(0) final List<Remedy> remedies,
+    @HiveField(1) final List<Condition> conditions,
   }) = _$SavedItemsImpl;
 
   factory _SavedItems.fromJson(Map<String, dynamic> json) =
       _$SavedItemsImpl.fromJson;
 
   @override
+  @HiveField(0)
   List<Remedy> get remedies;
   @override
+  @HiveField(1)
   List<Condition> get conditions;
 
   /// Create a copy of SavedItems

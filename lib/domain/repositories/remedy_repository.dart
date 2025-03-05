@@ -8,6 +8,7 @@ import 'package:purehavenorganics/domain/entities/related_remedy.dart';
 import 'package:purehavenorganics/domain/entities/remedies_by_category.dart';
 import 'package:purehavenorganics/domain/entities/remedies_for_condition.dart';
 import 'package:purehavenorganics/domain/entities/remedy.dart';
+import 'package:purehavenorganics/domain/entities/remedy_by_health_category.dart';
 import 'package:purehavenorganics/domain/entities/remedy_category.dart';
 import 'package:purehavenorganics/domain/entities/remedy_combination.dart';
 import 'package:purehavenorganics/domain/entities/remedy_condition.dart';
@@ -100,4 +101,11 @@ abstract class RemedyRepository {
   });
 
   Future<RemedyDetails> getRemedyDetails(String remedyName);
+
+  Future<List<RemedyByHealthCategory>> getRemediesByHealthCategory(
+    int categoryId, {
+    bool includeSubcategories = false,
+  });
+
+  Future<Remedy> getRemedyByName(String name);
 }

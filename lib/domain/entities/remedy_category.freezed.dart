@@ -21,9 +21,13 @@ RemedyCategory _$RemedyCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RemedyCategory {
+  @HiveField(0)
   int get categoryId => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get categoryName => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get description => throw _privateConstructorUsedError;
+  @HiveField(3)
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this RemedyCategory to a JSON map.
@@ -44,10 +48,10 @@ abstract class $RemedyCategoryCopyWith<$Res> {
   ) = _$RemedyCategoryCopyWithImpl<$Res, RemedyCategory>;
   @useResult
   $Res call({
-    int categoryId,
-    String categoryName,
-    String? description,
-    DateTime? createdAt,
+    @HiveField(0) int categoryId,
+    @HiveField(1) String categoryName,
+    @HiveField(2) String? description,
+    @HiveField(3) DateTime? createdAt,
   });
 }
 
@@ -109,10 +113,10 @@ abstract class _$$RemedyCategoryImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int categoryId,
-    String categoryName,
-    String? description,
-    DateTime? createdAt,
+    @HiveField(0) int categoryId,
+    @HiveField(1) String categoryName,
+    @HiveField(2) String? description,
+    @HiveField(3) DateTime? createdAt,
   });
 }
 
@@ -166,22 +170,26 @@ class __$$RemedyCategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RemedyCategoryImpl implements _RemedyCategory {
   const _$RemedyCategoryImpl({
-    required this.categoryId,
-    required this.categoryName,
-    this.description,
-    this.createdAt,
+    @HiveField(0) required this.categoryId,
+    @HiveField(1) required this.categoryName,
+    @HiveField(2) this.description,
+    @HiveField(3) this.createdAt,
   });
 
   factory _$RemedyCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$RemedyCategoryImplFromJson(json);
 
   @override
+  @HiveField(0)
   final int categoryId;
   @override
+  @HiveField(1)
   final String categoryName;
   @override
+  @HiveField(2)
   final String? description;
   @override
+  @HiveField(3)
   final DateTime? createdAt;
 
   @override
@@ -233,22 +241,26 @@ class _$RemedyCategoryImpl implements _RemedyCategory {
 
 abstract class _RemedyCategory implements RemedyCategory {
   const factory _RemedyCategory({
-    required final int categoryId,
-    required final String categoryName,
-    final String? description,
-    final DateTime? createdAt,
+    @HiveField(0) required final int categoryId,
+    @HiveField(1) required final String categoryName,
+    @HiveField(2) final String? description,
+    @HiveField(3) final DateTime? createdAt,
   }) = _$RemedyCategoryImpl;
 
   factory _RemedyCategory.fromJson(Map<String, dynamic> json) =
       _$RemedyCategoryImpl.fromJson;
 
   @override
+  @HiveField(0)
   int get categoryId;
   @override
+  @HiveField(1)
   String get categoryName;
   @override
+  @HiveField(2)
   String? get description;
   @override
+  @HiveField(3)
   DateTime? get createdAt;
 
   /// Create a copy of RemedyCategory

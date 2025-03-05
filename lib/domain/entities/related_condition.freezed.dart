@@ -21,9 +21,13 @@ RelatedCondition _$RelatedConditionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RelatedCondition {
+  @HiveField(0)
   String get relatedCondition => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get relationshipType => throw _privateConstructorUsedError;
+  @HiveField(2)
   int get relationshipStrength => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get relationshipDescription => throw _privateConstructorUsedError;
 
   /// Serializes this RelatedCondition to a JSON map.
@@ -44,10 +48,10 @@ abstract class $RelatedConditionCopyWith<$Res> {
   ) = _$RelatedConditionCopyWithImpl<$Res, RelatedCondition>;
   @useResult
   $Res call({
-    String relatedCondition,
-    String relationshipType,
-    int relationshipStrength,
-    String? relationshipDescription,
+    @HiveField(0) String relatedCondition,
+    @HiveField(1) String relationshipType,
+    @HiveField(2) int relationshipStrength,
+    @HiveField(3) String? relationshipDescription,
   });
 }
 
@@ -109,10 +113,10 @@ abstract class _$$RelatedConditionImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String relatedCondition,
-    String relationshipType,
-    int relationshipStrength,
-    String? relationshipDescription,
+    @HiveField(0) String relatedCondition,
+    @HiveField(1) String relationshipType,
+    @HiveField(2) int relationshipStrength,
+    @HiveField(3) String? relationshipDescription,
   });
 }
 
@@ -166,22 +170,26 @@ class __$$RelatedConditionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RelatedConditionImpl implements _RelatedCondition {
   const _$RelatedConditionImpl({
-    required this.relatedCondition,
-    required this.relationshipType,
-    required this.relationshipStrength,
-    this.relationshipDescription,
+    @HiveField(0) required this.relatedCondition,
+    @HiveField(1) required this.relationshipType,
+    @HiveField(2) required this.relationshipStrength,
+    @HiveField(3) this.relationshipDescription,
   });
 
   factory _$RelatedConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$RelatedConditionImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String relatedCondition;
   @override
+  @HiveField(1)
   final String relationshipType;
   @override
+  @HiveField(2)
   final int relationshipStrength;
   @override
+  @HiveField(3)
   final String? relationshipDescription;
 
   @override
@@ -236,22 +244,26 @@ class _$RelatedConditionImpl implements _RelatedCondition {
 
 abstract class _RelatedCondition implements RelatedCondition {
   const factory _RelatedCondition({
-    required final String relatedCondition,
-    required final String relationshipType,
-    required final int relationshipStrength,
-    final String? relationshipDescription,
+    @HiveField(0) required final String relatedCondition,
+    @HiveField(1) required final String relationshipType,
+    @HiveField(2) required final int relationshipStrength,
+    @HiveField(3) final String? relationshipDescription,
   }) = _$RelatedConditionImpl;
 
   factory _RelatedCondition.fromJson(Map<String, dynamic> json) =
       _$RelatedConditionImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get relatedCondition;
   @override
+  @HiveField(1)
   String get relationshipType;
   @override
+  @HiveField(2)
   int get relationshipStrength;
   @override
+  @HiveField(3)
   String? get relationshipDescription;
 
   /// Create a copy of RelatedCondition

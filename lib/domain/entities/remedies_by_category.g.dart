@@ -15,6 +15,7 @@ _$RemediesByCategoryImpl _$$RemediesByCategoryImplFromJson(
   primaryUses:
       (json['primaryUses'] as List<dynamic>?)?.map((e) => e as String).toList(),
   scientificName: json['scientificName'] as String?,
+  imgUrl: json['imgUrl'] as String?,
 );
 
 Map<String, dynamic> _$$RemediesByCategoryImplToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$RemediesByCategoryImplToJson(
   'commonNames': instance.commonNames,
   'primaryUses': instance.primaryUses,
   'scientificName': instance.scientificName,
+  'imgUrl': instance.imgUrl,
 };

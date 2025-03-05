@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:purehavenorganics/main.dart';
+import 'package:purehavenorganics/domain/entities/condition.dart';
+import 'package:purehavenorganics/domain/entities/remedy_category.dart';
+import 'package:purehavenorganics/domain/entities/health_category.dart';
+import 'package:purehavenorganics/presentation/screens/search_screen.dart';
+import 'package:purehavenorganics/presentation/screens/profile_screen.dart';
 import 'package:purehavenorganics/presentation/screens/app_entry_point.dart';
 import 'package:purehavenorganics/presentation/screens/categories_screen.dart';
-import 'package:purehavenorganics/presentation/screens/category_remedies_screen.dart';
-import 'package:purehavenorganics/presentation/screens/condition_detail_screen.dart';
 import 'package:purehavenorganics/presentation/screens/conditions_screen.dart';
-import 'package:purehavenorganics/presentation/screens/profile_screen.dart';
 import 'package:purehavenorganics/presentation/screens/remedy_detail_screen.dart';
-import 'package:purehavenorganics/presentation/screens/search_screen.dart';
+import 'package:purehavenorganics/core/utils/remedy/remedy_detail_arguments.dart';
 import 'package:purehavenorganics/presentation/screens/symptom_search_screen.dart';
+import 'package:purehavenorganics/presentation/screens/condition_detail_screen.dart';
+import 'package:purehavenorganics/presentation/screens/category_remedies_screen.dart';
+import 'package:purehavenorganics/presentation/screens/remedy_category_remedies_screen.dart';
 
 class AppRoutes {
   static const String root = '/';
@@ -17,6 +22,7 @@ class AppRoutes {
   static const String categoryRemedies = '/category-remedies';
   static const String conditions = '/conditions';
   static const String conditionDetail = '/condition-detail';
+  static const String healthCategoryRemedies = '/health-category-remedies';
   static const String remedyDetail = '/remedy-detail';
   static const String search = '/search';
   static const String symptomSearch = '/symptom-search';
@@ -28,10 +34,18 @@ class AppRouter {
     ('🔥 Navigating to: ${settings.name}').log();
     switch (settings.name) {
       case AppRoutes.root:
-        return MaterialPageRoute(builder: (_) => const AppEntryPoint());
+        return MaterialPageRoute(builder: (context) => const AppEntryPoint());
 
       case AppRoutes.home:
         return MaterialPageRoute(builder: (context) => const AppEntryPoint());
+
+      case AppRoutes.healthCategoryRemedies:
+        return MaterialPageRoute(
+          builder:
+              (context) => HealthCategoryRemediesScreen(
+                category: settings.arguments as RemedyCategory,
+              ),
+        );
 
       case AppRoutes.categories:
         return MaterialPageRoute(
@@ -47,7 +61,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder:
               (context) => CategoryRemediesScreen(
-                category: settings.arguments as String,
+                category: settings.arguments as HealthCategory,
               ),
         );
 
@@ -59,24 +73,24 @@ class AppRouter {
       case AppRoutes.conditionDetail:
         if (settings.arguments == null) {
           throw ArgumentError(
-            'Condition name is required for ConditionDetailScreen',
+            'Condition is required for ConditionDetailScreen',
           );
         }
         return MaterialPageRoute(
           builder:
               (context) => ConditionDetailScreen(
-                conditionName: settings.arguments as String,
+                condition: settings.arguments as Condition,
               ),
         );
 
       case AppRoutes.remedyDetail:
         if (settings.arguments == null) {
-          throw ArgumentError('Remedy name is required for RemedyDetailScreen');
+          throw ArgumentError(
+            'Remedy state is required for RemedyDetailScreen',
+          );
         }
         return MaterialPageRoute(
-          builder:
-              (context) =>
-                  RemedyDetailScreen(remedyName: settings.arguments as String),
+          builder: (context) => RemedyDetailScreen(args: settings.arguments as RemedyDetailArguments,),
         );
       case AppRoutes.search:
         return MaterialPageRoute(
@@ -95,7 +109,7 @@ class AppRouter {
         );
 
       case AppRoutes.profile:
-        return MaterialPageRoute(builder: (context) => const ProfileScreen());
+        return MaterialPageRoute(builder: (conetxt) => const ProfileScreen());
 
       default:
         return MaterialPageRoute(

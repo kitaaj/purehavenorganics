@@ -4,7 +4,7 @@ import 'package:purehavenorganics/core/config/app_router.dart';
 import 'package:purehavenorganics/presentation/providers/providers.dart';
 import 'package:purehavenorganics/presentation/widgets/condition/condition_list_tile.dart';
 import 'package:purehavenorganics/presentation/widgets/condition/condition_search_result_tile.dart';
-import 'package:purehavenorganics/presentation/widgets/condition/featured_condition_card.dart';
+// import 'package:purehavenorganics/presentation/widgets/condition/featured_condition_card.dart';
 
 class ConditionsScreen extends ConsumerStatefulWidget {
   const ConditionsScreen({super.key});
@@ -31,31 +31,32 @@ class _ConditionsScreenState extends ConsumerState<ConditionsScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar.large(
+          SliverAppBar(
             title: const Text('Health Conditions'),
-            floating: true,
             pinned: true,
             bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(70),
+              preferredSize: const Size.fromHeight(64),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: SearchBar(
                   controller: _searchController,
                   hintText: 'Search conditions or symptoms...',
                   leading: const Icon(Icons.search),
-                  trailing: [
-                    if (_searchController.text.isNotEmpty)
-                      IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          _searchController.clear();
-                          setState(() => _isSearching = false);
-                          ref
-                              .read(conditionSearchProvider.notifier)
-                              .clearSearch();
-                        },
-                      ),
-                  ],
+                  trailing:
+                      _searchController.text.isNotEmpty
+                          ? [
+                            IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                _searchController.clear();
+                                setState(() => _isSearching = false);
+                                ref
+                                    .read(conditionSearchProvider.notifier)
+                                    .clearSearch();
+                              },
+                            ),
+                          ]
+                          : null, // Remove trailing if no text is entered
                   onChanged: (value) {
                     if (value.isEmpty) {
                       setState(() => _isSearching = false);
@@ -73,45 +74,45 @@ class _ConditionsScreenState extends ConsumerState<ConditionsScreen> {
           ),
           if (!_isSearching) ...[
             // Featured Conditions Section
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  'Common Conditions',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 160,
-                child: conditions.when(
-                  data:
-                      (items) => ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        itemCount: items.take(5).length,
-                        itemBuilder: (context, index) {
-                          final condition = items[index];
-                          return FeaturedConditionCard(
-                            condition: condition,
-                            onTap:
-                                () => Navigator.of(
-                                  context,
-                                  rootNavigator: true,
-                                ).pushNamed(
-                                  AppRoutes.conditionDetail,
-                                  arguments: condition.name,
-                                ),
-                          );
-                        },
-                      ),
-                  loading:
-                      () => const Center(child: CircularProgressIndicator()),
-                  error: (error, _) => Center(child: Text('Error: $error')),
-                ),
-              ),
-            ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(16),
+            //     child: Text(
+            //       'Common Conditions',
+            //       style: Theme.of(context).textTheme.titleLarge,
+            //     ),
+            //   ),
+            // ),
+            // SliverToBoxAdapter(
+            //   child: SizedBox(
+            //     height: 160,
+            //     child: conditions.when(
+            //       data:
+            //           (items) => ListView.builder(
+            //             scrollDirection: Axis.horizontal,
+            //             padding: const EdgeInsets.symmetric(horizontal: 16),
+            //             itemCount: items.take(5).length,
+            //             itemBuilder: (context, index) {
+            //               final condition = items[index];
+            //               return FeaturedConditionCard(
+            //                 condition: condition,
+            //                 onTap:
+            //                     () => Navigator.of(
+            //                       context,
+            //                       rootNavigator: true,
+            //                     ).pushNamed(
+            //                       AppRoutes.conditionDetail,
+            //                       arguments: condition.name,
+            //                     ),
+            //               );
+            //             },
+            //           ),
+            //       loading:
+            //           () => const Center(child: CircularProgressIndicator()),
+            //       error: (error, _) => Center(child: Text('Error: $error')),
+            //     ),
+            //   ),
+            // ),
             // All Conditions Section
             SliverToBoxAdapter(
               child: Padding(
@@ -135,7 +136,7 @@ class _ConditionsScreenState extends ConsumerState<ConditionsScreen> {
                               rootNavigator: true,
                             ).pushNamed(
                               AppRoutes.conditionDetail,
-                              arguments: condition.name,
+                              arguments: condition,
                             ),
                       );
                     }, childCount: items.length),

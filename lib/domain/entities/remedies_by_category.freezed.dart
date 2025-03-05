@@ -21,10 +21,16 @@ RemediesByCategory _$RemediesByCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RemediesByCategory {
+  @HiveField(0)
   String get remedyName => throw _privateConstructorUsedError;
+  @HiveField(1)
   List<String>? get commonNames => throw _privateConstructorUsedError;
+  @HiveField(2)
   List<String>? get primaryUses => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get scientificName => throw _privateConstructorUsedError;
+  @HiveField(3)
+  String? get imgUrl => throw _privateConstructorUsedError;
 
   /// Serializes this RemediesByCategory to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,10 +50,11 @@ abstract class $RemediesByCategoryCopyWith<$Res> {
   ) = _$RemediesByCategoryCopyWithImpl<$Res, RemediesByCategory>;
   @useResult
   $Res call({
-    String remedyName,
-    List<String>? commonNames,
-    List<String>? primaryUses,
-    String? scientificName,
+    @HiveField(0) String remedyName,
+    @HiveField(1) List<String>? commonNames,
+    @HiveField(2) List<String>? primaryUses,
+    @HiveField(3) String? scientificName,
+    @HiveField(3) String? imgUrl,
   });
 }
 
@@ -70,6 +77,7 @@ class _$RemediesByCategoryCopyWithImpl<$Res, $Val extends RemediesByCategory>
     Object? commonNames = freezed,
     Object? primaryUses = freezed,
     Object? scientificName = freezed,
+    Object? imgUrl = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -93,6 +101,11 @@ class _$RemediesByCategoryCopyWithImpl<$Res, $Val extends RemediesByCategory>
                     ? _value.scientificName
                     : scientificName // ignore: cast_nullable_to_non_nullable
                         as String?,
+            imgUrl:
+                freezed == imgUrl
+                    ? _value.imgUrl
+                    : imgUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -109,10 +122,11 @@ abstract class _$$RemediesByCategoryImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String remedyName,
-    List<String>? commonNames,
-    List<String>? primaryUses,
-    String? scientificName,
+    @HiveField(0) String remedyName,
+    @HiveField(1) List<String>? commonNames,
+    @HiveField(2) List<String>? primaryUses,
+    @HiveField(3) String? scientificName,
+    @HiveField(3) String? imgUrl,
   });
 }
 
@@ -134,6 +148,7 @@ class __$$RemediesByCategoryImplCopyWithImpl<$Res>
     Object? commonNames = freezed,
     Object? primaryUses = freezed,
     Object? scientificName = freezed,
+    Object? imgUrl = freezed,
   }) {
     return _then(
       _$RemediesByCategoryImpl(
@@ -157,6 +172,11 @@ class __$$RemediesByCategoryImplCopyWithImpl<$Res>
                 ? _value.scientificName
                 : scientificName // ignore: cast_nullable_to_non_nullable
                     as String?,
+        imgUrl:
+            freezed == imgUrl
+                ? _value.imgUrl
+                : imgUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -166,10 +186,11 @@ class __$$RemediesByCategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RemediesByCategoryImpl implements _RemediesByCategory {
   const _$RemediesByCategoryImpl({
-    required this.remedyName,
-    final List<String>? commonNames,
-    final List<String>? primaryUses,
-    this.scientificName,
+    @HiveField(0) required this.remedyName,
+    @HiveField(1) final List<String>? commonNames,
+    @HiveField(2) final List<String>? primaryUses,
+    @HiveField(3) this.scientificName,
+    @HiveField(3) this.imgUrl,
   }) : _commonNames = commonNames,
        _primaryUses = primaryUses;
 
@@ -177,9 +198,11 @@ class _$RemediesByCategoryImpl implements _RemediesByCategory {
       _$$RemediesByCategoryImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String remedyName;
   final List<String>? _commonNames;
   @override
+  @HiveField(1)
   List<String>? get commonNames {
     final value = _commonNames;
     if (value == null) return null;
@@ -190,6 +213,7 @@ class _$RemediesByCategoryImpl implements _RemediesByCategory {
 
   final List<String>? _primaryUses;
   @override
+  @HiveField(2)
   List<String>? get primaryUses {
     final value = _primaryUses;
     if (value == null) return null;
@@ -199,11 +223,15 @@ class _$RemediesByCategoryImpl implements _RemediesByCategory {
   }
 
   @override
+  @HiveField(3)
   final String? scientificName;
+  @override
+  @HiveField(3)
+  final String? imgUrl;
 
   @override
   String toString() {
-    return 'RemediesByCategory(remedyName: $remedyName, commonNames: $commonNames, primaryUses: $primaryUses, scientificName: $scientificName)';
+    return 'RemediesByCategory(remedyName: $remedyName, commonNames: $commonNames, primaryUses: $primaryUses, scientificName: $scientificName, imgUrl: $imgUrl)';
   }
 
   @override
@@ -222,7 +250,8 @@ class _$RemediesByCategoryImpl implements _RemediesByCategory {
               _primaryUses,
             ) &&
             (identical(other.scientificName, scientificName) ||
-                other.scientificName == scientificName));
+                other.scientificName == scientificName) &&
+            (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -233,6 +262,7 @@ class _$RemediesByCategoryImpl implements _RemediesByCategory {
     const DeepCollectionEquality().hash(_commonNames),
     const DeepCollectionEquality().hash(_primaryUses),
     scientificName,
+    imgUrl,
   );
 
   /// Create a copy of RemediesByCategory
@@ -254,23 +284,31 @@ class _$RemediesByCategoryImpl implements _RemediesByCategory {
 
 abstract class _RemediesByCategory implements RemediesByCategory {
   const factory _RemediesByCategory({
-    required final String remedyName,
-    final List<String>? commonNames,
-    final List<String>? primaryUses,
-    final String? scientificName,
+    @HiveField(0) required final String remedyName,
+    @HiveField(1) final List<String>? commonNames,
+    @HiveField(2) final List<String>? primaryUses,
+    @HiveField(3) final String? scientificName,
+    @HiveField(3) final String? imgUrl,
   }) = _$RemediesByCategoryImpl;
 
   factory _RemediesByCategory.fromJson(Map<String, dynamic> json) =
       _$RemediesByCategoryImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get remedyName;
   @override
+  @HiveField(1)
   List<String>? get commonNames;
   @override
+  @HiveField(2)
   List<String>? get primaryUses;
   @override
+  @HiveField(3)
   String? get scientificName;
+  @override
+  @HiveField(3)
+  String? get imgUrl;
 
   /// Create a copy of RemediesByCategory
   /// with the given fields replaced by the non-null parameter values.

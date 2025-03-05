@@ -13,6 +13,7 @@ class AppTheme {
         padding: EdgeInsets.all(0.0),
         labelPadding: EdgeInsets.symmetric(horizontal: 8.0, vertical: -4.0),
       ),
+      drawerTheme: DrawerThemeData(shape: ContinuousRectangleBorder()),
     );
   }
 
@@ -28,6 +29,7 @@ class AppTheme {
         padding: EdgeInsets.all(0.0),
         labelPadding: EdgeInsets.symmetric(horizontal: 6.0, vertical: -2.0),
       ),
+      drawerTheme: DrawerThemeData(shape: ContinuousRectangleBorder()),
     );
   }
 }

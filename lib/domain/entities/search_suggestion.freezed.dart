@@ -21,10 +21,15 @@ SearchSuggestion _$SearchSuggestionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SearchSuggestion {
+  @HiveField(0)
   String get suggestion => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get suggestionType => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get category => throw _privateConstructorUsedError;
+  @HiveField(3)
   double get relevanceScore => throw _privateConstructorUsedError;
+  @HiveField(4)
   Map<String, dynamic>? get additionalInfo =>
       throw _privateConstructorUsedError;
 
@@ -46,11 +51,11 @@ abstract class $SearchSuggestionCopyWith<$Res> {
   ) = _$SearchSuggestionCopyWithImpl<$Res, SearchSuggestion>;
   @useResult
   $Res call({
-    String suggestion,
-    String suggestionType,
-    String? category,
-    double relevanceScore,
-    Map<String, dynamic>? additionalInfo,
+    @HiveField(0) String suggestion,
+    @HiveField(1) String suggestionType,
+    @HiveField(2) String? category,
+    @HiveField(3) double relevanceScore,
+    @HiveField(4) Map<String, dynamic>? additionalInfo,
   });
 }
 
@@ -118,11 +123,11 @@ abstract class _$$SearchSuggestionImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String suggestion,
-    String suggestionType,
-    String? category,
-    double relevanceScore,
-    Map<String, dynamic>? additionalInfo,
+    @HiveField(0) String suggestion,
+    @HiveField(1) String suggestionType,
+    @HiveField(2) String? category,
+    @HiveField(3) double relevanceScore,
+    @HiveField(4) Map<String, dynamic>? additionalInfo,
   });
 }
 
@@ -182,26 +187,31 @@ class __$$SearchSuggestionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SearchSuggestionImpl implements _SearchSuggestion {
   const _$SearchSuggestionImpl({
-    required this.suggestion,
-    required this.suggestionType,
-    this.category,
-    required this.relevanceScore,
-    final Map<String, dynamic>? additionalInfo,
+    @HiveField(0) required this.suggestion,
+    @HiveField(1) required this.suggestionType,
+    @HiveField(2) this.category,
+    @HiveField(3) required this.relevanceScore,
+    @HiveField(4) final Map<String, dynamic>? additionalInfo,
   }) : _additionalInfo = additionalInfo;
 
   factory _$SearchSuggestionImpl.fromJson(Map<String, dynamic> json) =>
       _$$SearchSuggestionImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String suggestion;
   @override
+  @HiveField(1)
   final String suggestionType;
   @override
+  @HiveField(2)
   final String? category;
   @override
+  @HiveField(3)
   final double relevanceScore;
   final Map<String, dynamic>? _additionalInfo;
   @override
+  @HiveField(4)
   Map<String, dynamic>? get additionalInfo {
     final value = _additionalInfo;
     if (value == null) return null;
@@ -264,25 +274,30 @@ class _$SearchSuggestionImpl implements _SearchSuggestion {
 
 abstract class _SearchSuggestion implements SearchSuggestion {
   const factory _SearchSuggestion({
-    required final String suggestion,
-    required final String suggestionType,
-    final String? category,
-    required final double relevanceScore,
-    final Map<String, dynamic>? additionalInfo,
+    @HiveField(0) required final String suggestion,
+    @HiveField(1) required final String suggestionType,
+    @HiveField(2) final String? category,
+    @HiveField(3) required final double relevanceScore,
+    @HiveField(4) final Map<String, dynamic>? additionalInfo,
   }) = _$SearchSuggestionImpl;
 
   factory _SearchSuggestion.fromJson(Map<String, dynamic> json) =
       _$SearchSuggestionImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get suggestion;
   @override
+  @HiveField(1)
   String get suggestionType;
   @override
+  @HiveField(2)
   String? get category;
   @override
+  @HiveField(3)
   double get relevanceScore;
   @override
+  @HiveField(4)
   Map<String, dynamic>? get additionalInfo;
 
   /// Create a copy of SearchSuggestion

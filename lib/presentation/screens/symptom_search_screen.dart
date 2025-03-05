@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purehavenorganics/domain/entities/condition.dart'
+    show Condition;
+import 'package:purehavenorganics/presentation/providers/providers.dart';
 import 'package:purehavenorganics/presentation/providers/symptom_search_provider.dart';
 import 'package:purehavenorganics/presentation/widgets/common/error_view.dart';
 import 'package:purehavenorganics/presentation/widgets/symptom/symptom_card.dart';
@@ -8,13 +11,11 @@ import 'package:purehavenorganics/presentation/widgets/utility_widgets/loading_v
 class SymptomSearchScreen extends ConsumerStatefulWidget {
   final String symptom;
 
-  const SymptomSearchScreen({
-    required this.symptom,
-    super.key,
-  });
+  const SymptomSearchScreen({required this.symptom, super.key});
 
   @override
-  ConsumerState<SymptomSearchScreen> createState() => _SymptomSearchScreenState();
+  ConsumerState<SymptomSearchScreen> createState() =>
+      _SymptomSearchScreenState();
 }
 
 class _SymptomSearchScreenState extends ConsumerState<SymptomSearchScreen> {
@@ -23,7 +24,9 @@ class _SymptomSearchScreenState extends ConsumerState<SymptomSearchScreen> {
     super.initState();
     // Trigger search when screen loads
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(symptomSearchProvider.notifier).searchBySymptoms([widget.symptom]);
+      ref.read(symptomSearchProvider.notifier).searchBySymptoms([
+        widget.symptom,
+      ]);
     });
   }
 
@@ -32,9 +35,7 @@ class _SymptomSearchScreenState extends ConsumerState<SymptomSearchScreen> {
     final searchState = ref.watch(symptomSearchProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Results for "${widget.symptom}"'),
-      ),
+      appBar: AppBar(title: Text('Results for "${widget.symptom}"')),
       body: searchState.when(
         data: (results) {
           if (results.isEmpty) {
@@ -50,29 +51,34 @@ class _SymptomSearchScreenState extends ConsumerState<SymptomSearchScreen> {
               final result = results[index];
               return SymptomCard(
                 result: result,
-                onTap: () => _navigateToCondition(context, result.conditionName),
+                onTap: () {
+                  final condition = ref.read(
+                    selectedConditionProvider(result.conditionName),
+                  );
+                  //TODO: Condition could be null
+                  if (condition != null) {
+                    _navigateToCondition(context, condition);
+                  }
+                },
               );
             },
           );
         },
         loading: () => const LoadingView(),
-        error: (error, stackTrace) => ErrorView(
-          error: error.toString(),
-          onRetry: () {
-            ref
-                .read(symptomSearchProvider.notifier)
-                .searchBySymptoms([widget.symptom]);
-          },
-        ),
+        error:
+            (error, stackTrace) => ErrorView(
+              error: error.toString(),
+              onRetry: () {
+                ref.read(symptomSearchProvider.notifier).searchBySymptoms([
+                  widget.symptom,
+                ]);
+              },
+            ),
       ),
     );
   }
 
-  void _navigateToCondition(BuildContext context, String conditionName) {
-    Navigator.pushNamed(
-      context,
-      '/condition-detail',
-      arguments: conditionName,
-    );
+  void _navigateToCondition(BuildContext context, Condition condition) {
+    Navigator.pushNamed(context, '/condition-detail', arguments: condition);
   }
 }
