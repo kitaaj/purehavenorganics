@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purehavenorganics/core/config/app_router.dart';
 import 'package:purehavenorganics/domain/entities/related_condition.dart';
+import 'package:purehavenorganics/presentation/providers/providers.dart';
 
-class RelatedConditionsList extends StatelessWidget {
+class RelatedConditionsList extends ConsumerWidget {
   final List<RelatedCondition> conditions;
 
   const RelatedConditionsList({required this.conditions, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -33,10 +35,15 @@ class RelatedConditionsList extends StatelessWidget {
                       : Text(condition.relationshipType),
               trailing: Text('${condition.relationshipStrength}%'),
               onTap: () {
-                Navigator.of(context).pushNamed(
-                  AppRoutes.conditionDetail,
-                  arguments: condition.relatedCondition,
+                final conditionFromConditionsList = ref.watch(
+                  selectedConditionProvider(condition.relatedCondition),
                 );
+                if (conditionFromConditionsList != null) {
+                  Navigator.of(context).popAndPushNamed(
+                    AppRoutes.conditionDetail,
+                    arguments: conditionFromConditionsList,
+                  );
+                }
               },
             );
           },

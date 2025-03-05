@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:purehavenorganics/core/utils/get_category_icon.dart';
+import 'package:purehavenorganics/domain/entities/remedy_category.dart';
 
+@immutable
 class CategoryCard extends StatelessWidget {
-  final String title;
-  final String? description;
+  final RemedyCategory category;
   final VoidCallback onTap;
 
-  const CategoryCard({
-    required this.title,
-    this.description,
-    required this.onTap,
-    super.key,
-  });
+  const CategoryCard({required this.category, required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +23,22 @@ class CategoryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                getCategoryIcon(title),
+                getRemedyCategoryIcon(category.categoryName),
                 size: 32,
                 color: Theme.of(context).colorScheme.primary,
               ),
               const SizedBox(height: 8),
               Text(
-                title,
+                category.categoryName,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleSmall,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              if (description != null) ...[
+              if (category.description != null) ...[
                 const SizedBox(height: 4),
                 Text(
-                  description!,
+                  category.description!,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall,
                   maxLines: 1,

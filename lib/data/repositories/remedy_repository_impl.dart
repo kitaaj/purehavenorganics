@@ -11,6 +11,7 @@ import 'package:purehavenorganics/domain/entities/related_remedy.dart';
 import 'package:purehavenorganics/domain/entities/remedies_by_category.dart';
 import 'package:purehavenorganics/domain/entities/remedies_for_condition.dart';
 import 'package:purehavenorganics/domain/entities/remedy.dart';
+import 'package:purehavenorganics/domain/entities/remedy_by_health_category.dart';
 import 'package:purehavenorganics/domain/entities/remedy_category.dart';
 import 'package:purehavenorganics/domain/entities/remedy_combination.dart';
 import 'package:purehavenorganics/domain/entities/remedy_condition.dart';
@@ -32,7 +33,9 @@ class RemedyRepositoryImpl implements RemedyRepository {
     bool forceRefresh = false,
   }) async {
     try {
-      return RetryHelper.retry(
+      ('Fetching remedies with params: $params').log();
+
+      final remedies = await RetryHelper.retry(
         operation:
             () => _dataSource.getRemedies(
               page: params.page,
@@ -41,6 +44,8 @@ class RemedyRepositoryImpl implements RemedyRepository {
               searchTerm: params.searchTerm,
             ),
       );
+      ('[RemedyRepositoryImpl] Fetched remedies: ${remedies.map((r) => r.imgUrl).toList()}').log();
+      return remedies;
     } catch (e) {
       ('[log] Error in RemedyRepositoryImpl.getRemedies: $e').log();
       throw RemedyException('Failed to fetch remedies: $e');
@@ -313,7 +318,9 @@ class RemedyRepositoryImpl implements RemedyRepository {
   }
 
   @override
-  Future<List<RemediesByCategory>> getRemediesByCategory(String categoryName) async {
+  Future<List<RemediesByCategory>> getRemediesByCategory(
+    String categoryName,
+  ) async {
     try {
       return await _dataSource.getRemediesByCategory(categoryName);
     } catch (e) {
@@ -368,5 +375,25 @@ class RemedyRepositoryImpl implements RemedyRepository {
       stack.log();
       throw RemedyException('Failed to fetch remedy details: $e');
     }
+  }
+
+  @override
+  Future<List<RemedyByHealthCategory>> getRemediesByHealthCategory(
+    int categoryId, {
+    bool includeSubcategories = false,
+  }) async {
+    try {
+      return await _dataSource.getRemediesByHealthCategory(
+        categoryId,
+        includeSubcategories: includeSubcategories,
+      );
+    } catch (e) {
+      throw RemedyException('Failed to fetch remedies by health category: $e');
+    }
+  }
+  
+  @override
+  Future<Remedy> getRemedyByName(String name) async {
+    return _dataSource.getRemedyByName(name);
   }
 }

@@ -21,10 +21,15 @@ HealthCategory _$HealthCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$HealthCategory {
+  @HiveField(0)
   int get categoryId => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get displayName => throw _privateConstructorUsedError;
+  @HiveField(2)
   int? get parentCategoryId => throw _privateConstructorUsedError;
+  @HiveField(3)
   int get level => throw _privateConstructorUsedError;
+  @HiveField(4)
   bool get isLeaf => throw _privateConstructorUsedError;
 
   /// Serializes this HealthCategory to a JSON map.
@@ -45,11 +50,11 @@ abstract class $HealthCategoryCopyWith<$Res> {
   ) = _$HealthCategoryCopyWithImpl<$Res, HealthCategory>;
   @useResult
   $Res call({
-    int categoryId,
-    String displayName,
-    int? parentCategoryId,
-    int level,
-    bool isLeaf,
+    @HiveField(0) int categoryId,
+    @HiveField(1) String displayName,
+    @HiveField(2) int? parentCategoryId,
+    @HiveField(3) int level,
+    @HiveField(4) bool isLeaf,
   });
 }
 
@@ -117,11 +122,11 @@ abstract class _$$HealthCategoryImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int categoryId,
-    String displayName,
-    int? parentCategoryId,
-    int level,
-    bool isLeaf,
+    @HiveField(0) int categoryId,
+    @HiveField(1) String displayName,
+    @HiveField(2) int? parentCategoryId,
+    @HiveField(3) int level,
+    @HiveField(4) bool isLeaf,
   });
 }
 
@@ -181,25 +186,30 @@ class __$$HealthCategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$HealthCategoryImpl implements _HealthCategory {
   const _$HealthCategoryImpl({
-    required this.categoryId,
-    required this.displayName,
-    this.parentCategoryId,
-    required this.level,
-    required this.isLeaf,
+    @HiveField(0) required this.categoryId,
+    @HiveField(1) required this.displayName,
+    @HiveField(2) this.parentCategoryId,
+    @HiveField(3) required this.level,
+    @HiveField(4) required this.isLeaf,
   });
 
   factory _$HealthCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$HealthCategoryImplFromJson(json);
 
   @override
+  @HiveField(0)
   final int categoryId;
   @override
+  @HiveField(1)
   final String displayName;
   @override
+  @HiveField(2)
   final int? parentCategoryId;
   @override
+  @HiveField(3)
   final int level;
   @override
+  @HiveField(4)
   final bool isLeaf;
 
   @override
@@ -252,25 +262,30 @@ class _$HealthCategoryImpl implements _HealthCategory {
 
 abstract class _HealthCategory implements HealthCategory {
   const factory _HealthCategory({
-    required final int categoryId,
-    required final String displayName,
-    final int? parentCategoryId,
-    required final int level,
-    required final bool isLeaf,
+    @HiveField(0) required final int categoryId,
+    @HiveField(1) required final String displayName,
+    @HiveField(2) final int? parentCategoryId,
+    @HiveField(3) required final int level,
+    @HiveField(4) required final bool isLeaf,
   }) = _$HealthCategoryImpl;
 
   factory _HealthCategory.fromJson(Map<String, dynamic> json) =
       _$HealthCategoryImpl.fromJson;
 
   @override
+  @HiveField(0)
   int get categoryId;
   @override
+  @HiveField(1)
   String get displayName;
   @override
+  @HiveField(2)
   int? get parentCategoryId;
   @override
+  @HiveField(3)
   int get level;
   @override
+  @HiveField(4)
   bool get isLeaf;
 
   /// Create a copy of HealthCategory

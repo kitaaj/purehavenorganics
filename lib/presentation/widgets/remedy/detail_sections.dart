@@ -20,10 +20,10 @@ class ActiveComponentsSection extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(component.name),
-                subtitle: Text('Importance'),
+                subtitle: Text('Importance:'),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
                 child: Wrap(
                   runSpacing: 3,
                   spacing: 8,

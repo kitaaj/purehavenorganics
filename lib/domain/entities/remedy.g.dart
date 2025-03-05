@@ -13,7 +13,10 @@ _$RemedyImpl _$$RemedyImplFromJson(Map<String, dynamic> json) => _$RemedyImpl(
   scientificName: json['scientificName'] as String?,
   commonNames:
       (json['commonNames'] as List<dynamic>?)?.map((e) => e as String).toList(),
-  activeComponents: json['activeComponents'] as Map<String, dynamic>?,
+  activeComponents:
+      (json['activeComponents'] as List<dynamic>?)
+          ?.map((e) => ActiveComponent.fromJson(e as Map<String, dynamic>))
+          .toList(),
   naturalSources:
       (json['naturalSources'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -74,6 +77,7 @@ _$RemedyImpl _$$RemedyImplFromJson(Map<String, dynamic> json) => _$RemedyImpl(
           ?.map((e) => (e as num).toInt())
           .toList() ??
       const [],
+  imgUrl: json['imgUrl'] as String?,
 );
 
 Map<String, dynamic> _$$RemedyImplToJson(_$RemedyImpl instance) =>
@@ -110,4 +114,5 @@ Map<String, dynamic> _$$RemedyImplToJson(_$RemedyImpl instance) =>
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'conditions': instance.conditions,
+      'imgUrl': instance.imgUrl,
     };

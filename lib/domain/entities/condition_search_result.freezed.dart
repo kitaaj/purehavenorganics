@@ -23,11 +23,17 @@ ConditionSearchResult _$ConditionSearchResultFromJson(
 
 /// @nodoc
 mixin _$ConditionSearchResult {
+  @HiveField(0)
   String get conditionName => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get conditionDescription => throw _privateConstructorUsedError;
+  @HiveField(2)
   List<String> get symptoms => throw _privateConstructorUsedError;
+  @HiveField(3)
   int get remedyCount => throw _privateConstructorUsedError;
+  @HiveField(4)
   int get avgEffectiveness => throw _privateConstructorUsedError;
+  @HiveField(5)
   Map<String, dynamic> get topRemedies => throw _privateConstructorUsedError;
 
   /// Serializes this ConditionSearchResult to a JSON map.
@@ -48,12 +54,12 @@ abstract class $ConditionSearchResultCopyWith<$Res> {
   ) = _$ConditionSearchResultCopyWithImpl<$Res, ConditionSearchResult>;
   @useResult
   $Res call({
-    String conditionName,
-    String? conditionDescription,
-    List<String> symptoms,
-    int remedyCount,
-    int avgEffectiveness,
-    Map<String, dynamic> topRemedies,
+    @HiveField(0) String conditionName,
+    @HiveField(1) String? conditionDescription,
+    @HiveField(2) List<String> symptoms,
+    @HiveField(3) int remedyCount,
+    @HiveField(4) int avgEffectiveness,
+    @HiveField(5) Map<String, dynamic> topRemedies,
   });
 }
 
@@ -130,12 +136,12 @@ abstract class _$$ConditionSearchResultImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String conditionName,
-    String? conditionDescription,
-    List<String> symptoms,
-    int remedyCount,
-    int avgEffectiveness,
-    Map<String, dynamic> topRemedies,
+    @HiveField(0) String conditionName,
+    @HiveField(1) String? conditionDescription,
+    @HiveField(2) List<String> symptoms,
+    @HiveField(3) int remedyCount,
+    @HiveField(4) int avgEffectiveness,
+    @HiveField(5) Map<String, dynamic> topRemedies,
   });
 }
 
@@ -202,12 +208,12 @@ class __$$ConditionSearchResultImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ConditionSearchResultImpl implements _ConditionSearchResult {
   const _$ConditionSearchResultImpl({
-    required this.conditionName,
-    this.conditionDescription,
-    required final List<String> symptoms,
-    required this.remedyCount,
-    required this.avgEffectiveness,
-    required final Map<String, dynamic> topRemedies,
+    @HiveField(0) required this.conditionName,
+    @HiveField(1) this.conditionDescription,
+    @HiveField(2) required final List<String> symptoms,
+    @HiveField(3) required this.remedyCount,
+    @HiveField(4) required this.avgEffectiveness,
+    @HiveField(5) required final Map<String, dynamic> topRemedies,
   }) : _symptoms = symptoms,
        _topRemedies = topRemedies;
 
@@ -215,11 +221,14 @@ class _$ConditionSearchResultImpl implements _ConditionSearchResult {
       _$$ConditionSearchResultImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String conditionName;
   @override
+  @HiveField(1)
   final String? conditionDescription;
   final List<String> _symptoms;
   @override
+  @HiveField(2)
   List<String> get symptoms {
     if (_symptoms is EqualUnmodifiableListView) return _symptoms;
     // ignore: implicit_dynamic_type
@@ -227,11 +236,14 @@ class _$ConditionSearchResultImpl implements _ConditionSearchResult {
   }
 
   @override
+  @HiveField(3)
   final int remedyCount;
   @override
+  @HiveField(4)
   final int avgEffectiveness;
   final Map<String, dynamic> _topRemedies;
   @override
+  @HiveField(5)
   Map<String, dynamic> get topRemedies {
     if (_topRemedies is EqualUnmodifiableMapView) return _topRemedies;
     // ignore: implicit_dynamic_type
@@ -295,28 +307,34 @@ class _$ConditionSearchResultImpl implements _ConditionSearchResult {
 
 abstract class _ConditionSearchResult implements ConditionSearchResult {
   const factory _ConditionSearchResult({
-    required final String conditionName,
-    final String? conditionDescription,
-    required final List<String> symptoms,
-    required final int remedyCount,
-    required final int avgEffectiveness,
-    required final Map<String, dynamic> topRemedies,
+    @HiveField(0) required final String conditionName,
+    @HiveField(1) final String? conditionDescription,
+    @HiveField(2) required final List<String> symptoms,
+    @HiveField(3) required final int remedyCount,
+    @HiveField(4) required final int avgEffectiveness,
+    @HiveField(5) required final Map<String, dynamic> topRemedies,
   }) = _$ConditionSearchResultImpl;
 
   factory _ConditionSearchResult.fromJson(Map<String, dynamic> json) =
       _$ConditionSearchResultImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get conditionName;
   @override
+  @HiveField(1)
   String? get conditionDescription;
   @override
+  @HiveField(2)
   List<String> get symptoms;
   @override
+  @HiveField(3)
   int get remedyCount;
   @override
+  @HiveField(4)
   int get avgEffectiveness;
   @override
+  @HiveField(5)
   Map<String, dynamic> get topRemedies;
 
   /// Create a copy of ConditionSearchResult

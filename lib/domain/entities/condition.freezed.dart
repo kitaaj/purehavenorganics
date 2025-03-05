@@ -21,10 +21,15 @@ Condition _$ConditionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Condition {
+  @HiveField(0)
   int get conditionId => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get description => throw _privateConstructorUsedError;
+  @HiveField(3)
   List<String>? get symptoms => throw _privateConstructorUsedError;
+  @HiveField(4)
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this Condition to a JSON map.
@@ -43,11 +48,11 @@ abstract class $ConditionCopyWith<$Res> {
       _$ConditionCopyWithImpl<$Res, Condition>;
   @useResult
   $Res call({
-    int conditionId,
-    String name,
-    String? description,
-    List<String>? symptoms,
-    DateTime? createdAt,
+    @HiveField(0) int conditionId,
+    @HiveField(1) String name,
+    @HiveField(2) String? description,
+    @HiveField(3) List<String>? symptoms,
+    @HiveField(4) DateTime? createdAt,
   });
 }
 
@@ -115,11 +120,11 @@ abstract class _$$ConditionImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    int conditionId,
-    String name,
-    String? description,
-    List<String>? symptoms,
-    DateTime? createdAt,
+    @HiveField(0) int conditionId,
+    @HiveField(1) String name,
+    @HiveField(2) String? description,
+    @HiveField(3) List<String>? symptoms,
+    @HiveField(4) DateTime? createdAt,
   });
 }
 
@@ -179,24 +184,28 @@ class __$$ConditionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ConditionImpl implements _Condition {
   const _$ConditionImpl({
-    required this.conditionId,
-    required this.name,
-    this.description,
-    final List<String>? symptoms,
-    this.createdAt,
+    @HiveField(0) required this.conditionId,
+    @HiveField(1) required this.name,
+    @HiveField(2) this.description,
+    @HiveField(3) final List<String>? symptoms,
+    @HiveField(4) this.createdAt,
   }) : _symptoms = symptoms;
 
   factory _$ConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConditionImplFromJson(json);
 
   @override
+  @HiveField(0)
   final int conditionId;
   @override
+  @HiveField(1)
   final String name;
   @override
+  @HiveField(2)
   final String? description;
   final List<String>? _symptoms;
   @override
+  @HiveField(3)
   List<String>? get symptoms {
     final value = _symptoms;
     if (value == null) return null;
@@ -206,6 +215,7 @@ class _$ConditionImpl implements _Condition {
   }
 
   @override
+  @HiveField(4)
   final DateTime? createdAt;
 
   @override
@@ -255,25 +265,30 @@ class _$ConditionImpl implements _Condition {
 
 abstract class _Condition implements Condition {
   const factory _Condition({
-    required final int conditionId,
-    required final String name,
-    final String? description,
-    final List<String>? symptoms,
-    final DateTime? createdAt,
+    @HiveField(0) required final int conditionId,
+    @HiveField(1) required final String name,
+    @HiveField(2) final String? description,
+    @HiveField(3) final List<String>? symptoms,
+    @HiveField(4) final DateTime? createdAt,
   }) = _$ConditionImpl;
 
   factory _Condition.fromJson(Map<String, dynamic> json) =
       _$ConditionImpl.fromJson;
 
   @override
+  @HiveField(0)
   int get conditionId;
   @override
+  @HiveField(1)
   String get name;
   @override
+  @HiveField(2)
   String? get description;
   @override
+  @HiveField(3)
   List<String>? get symptoms;
   @override
+  @HiveField(4)
   DateTime? get createdAt;
 
   /// Create a copy of Condition

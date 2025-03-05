@@ -1,42 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:purehavenorganics/domain/entities/effectiveness_stats.dart';
 
 class EffectivenessStatsSection extends StatelessWidget {
-  final EffectivenessStats stats;
+  final Map<String, double> stats;
 
-  const EffectivenessStatsSection({
-    required this.stats,
-    super.key,
-  });
+  const EffectivenessStatsSection({required this.stats, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        if(stats.averageRating != null)
-        ListTile(
-          title: const Text('Average Rating'),
-          subtitle: LinearProgressIndicator(
-            value: stats.averageRating as double,
-            backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-            valueColor: AlwaysStoppedAnimation<Color>(
-              Theme.of(context).colorScheme.primary,
+      children: stats.entries.map((entry) {
+        return Column(
+          children: [
+            Row(
+              children: [
+                Expanded(child: Text(entry.key)),
+                Text('${(entry.value * 100).toStringAsFixed(0)}%'),
+              ],
             ),
-          ),
-        ),
-        if (stats.totalConditions.toString().isNotEmpty)
-          ListTile(
-            leading: const Icon(Icons.science),
-            title: const Text('Conditions Treated'),
-            subtitle: Text(stats.totalConditions.toString()),
-          ),
-        if (stats.evidenceBasedCount.toString().isNotEmpty)
-          ListTile(
-            leading: const Icon(Icons.history),
-            title: const Text('Evidence-based Count'),
-            subtitle: Text(stats.evidenceBasedCount.toString()),
-          ),
-      ],
+            const SizedBox(height: 4),
+            LinearProgressIndicator(
+              value: entry.value,
+              backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            const SizedBox(height: 8),
+          ],
+        );
+      }).toList(),
     );
   }
 }

@@ -21,11 +21,18 @@ RemediesForCondition _$RemediesForConditionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RemediesForCondition {
+  @HiveField(0)
   String get remedyName => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get scientificName => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get categoryName => throw _privateConstructorUsedError;
+  @HiveField(3)
   int get effectivenessRating => throw _privateConstructorUsedError;
+  @HiveField(4)
   List<String>? get preparationMethods => throw _privateConstructorUsedError;
+  @HiveField(5)
+  String? get imgUrl => throw _privateConstructorUsedError;
 
   /// Serializes this RemediesForCondition to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,11 +52,12 @@ abstract class $RemediesForConditionCopyWith<$Res> {
   ) = _$RemediesForConditionCopyWithImpl<$Res, RemediesForCondition>;
   @useResult
   $Res call({
-    String remedyName,
-    String? scientificName,
-    String categoryName,
-    int effectivenessRating,
-    List<String>? preparationMethods,
+    @HiveField(0) String remedyName,
+    @HiveField(1) String? scientificName,
+    @HiveField(2) String categoryName,
+    @HiveField(3) int effectivenessRating,
+    @HiveField(4) List<String>? preparationMethods,
+    @HiveField(5) String? imgUrl,
   });
 }
 
@@ -76,6 +84,7 @@ class _$RemediesForConditionCopyWithImpl<
     Object? categoryName = null,
     Object? effectivenessRating = null,
     Object? preparationMethods = freezed,
+    Object? imgUrl = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -104,6 +113,11 @@ class _$RemediesForConditionCopyWithImpl<
                     ? _value.preparationMethods
                     : preparationMethods // ignore: cast_nullable_to_non_nullable
                         as List<String>?,
+            imgUrl:
+                freezed == imgUrl
+                    ? _value.imgUrl
+                    : imgUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -120,11 +134,12 @@ abstract class _$$RemediesForConditionImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String remedyName,
-    String? scientificName,
-    String categoryName,
-    int effectivenessRating,
-    List<String>? preparationMethods,
+    @HiveField(0) String remedyName,
+    @HiveField(1) String? scientificName,
+    @HiveField(2) String categoryName,
+    @HiveField(3) int effectivenessRating,
+    @HiveField(4) List<String>? preparationMethods,
+    @HiveField(5) String? imgUrl,
   });
 }
 
@@ -147,6 +162,7 @@ class __$$RemediesForConditionImplCopyWithImpl<$Res>
     Object? categoryName = null,
     Object? effectivenessRating = null,
     Object? preparationMethods = freezed,
+    Object? imgUrl = freezed,
   }) {
     return _then(
       _$RemediesForConditionImpl(
@@ -175,6 +191,11 @@ class __$$RemediesForConditionImplCopyWithImpl<$Res>
                 ? _value._preparationMethods
                 : preparationMethods // ignore: cast_nullable_to_non_nullable
                     as List<String>?,
+        imgUrl:
+            freezed == imgUrl
+                ? _value.imgUrl
+                : imgUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -184,26 +205,32 @@ class __$$RemediesForConditionImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RemediesForConditionImpl implements _RemediesForCondition {
   const _$RemediesForConditionImpl({
-    required this.remedyName,
-    this.scientificName,
-    required this.categoryName,
-    required this.effectivenessRating,
-    final List<String>? preparationMethods,
+    @HiveField(0) required this.remedyName,
+    @HiveField(1) this.scientificName,
+    @HiveField(2) required this.categoryName,
+    @HiveField(3) required this.effectivenessRating,
+    @HiveField(4) final List<String>? preparationMethods,
+    @HiveField(5) this.imgUrl,
   }) : _preparationMethods = preparationMethods;
 
   factory _$RemediesForConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$RemediesForConditionImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String remedyName;
   @override
+  @HiveField(1)
   final String? scientificName;
   @override
+  @HiveField(2)
   final String categoryName;
   @override
+  @HiveField(3)
   final int effectivenessRating;
   final List<String>? _preparationMethods;
   @override
+  @HiveField(4)
   List<String>? get preparationMethods {
     final value = _preparationMethods;
     if (value == null) return null;
@@ -214,8 +241,12 @@ class _$RemediesForConditionImpl implements _RemediesForCondition {
   }
 
   @override
+  @HiveField(5)
+  final String? imgUrl;
+
+  @override
   String toString() {
-    return 'RemediesForCondition(remedyName: $remedyName, scientificName: $scientificName, categoryName: $categoryName, effectivenessRating: $effectivenessRating, preparationMethods: $preparationMethods)';
+    return 'RemediesForCondition(remedyName: $remedyName, scientificName: $scientificName, categoryName: $categoryName, effectivenessRating: $effectivenessRating, preparationMethods: $preparationMethods, imgUrl: $imgUrl)';
   }
 
   @override
@@ -234,7 +265,8 @@ class _$RemediesForConditionImpl implements _RemediesForCondition {
             const DeepCollectionEquality().equals(
               other._preparationMethods,
               _preparationMethods,
-            ));
+            ) &&
+            (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -246,6 +278,7 @@ class _$RemediesForConditionImpl implements _RemediesForCondition {
     categoryName,
     effectivenessRating,
     const DeepCollectionEquality().hash(_preparationMethods),
+    imgUrl,
   );
 
   /// Create a copy of RemediesForCondition
@@ -268,26 +301,35 @@ class _$RemediesForConditionImpl implements _RemediesForCondition {
 
 abstract class _RemediesForCondition implements RemediesForCondition {
   const factory _RemediesForCondition({
-    required final String remedyName,
-    final String? scientificName,
-    required final String categoryName,
-    required final int effectivenessRating,
-    final List<String>? preparationMethods,
+    @HiveField(0) required final String remedyName,
+    @HiveField(1) final String? scientificName,
+    @HiveField(2) required final String categoryName,
+    @HiveField(3) required final int effectivenessRating,
+    @HiveField(4) final List<String>? preparationMethods,
+    @HiveField(5) final String? imgUrl,
   }) = _$RemediesForConditionImpl;
 
   factory _RemediesForCondition.fromJson(Map<String, dynamic> json) =
       _$RemediesForConditionImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get remedyName;
   @override
+  @HiveField(1)
   String? get scientificName;
   @override
+  @HiveField(2)
   String get categoryName;
   @override
+  @HiveField(3)
   int get effectivenessRating;
   @override
+  @HiveField(4)
   List<String>? get preparationMethods;
+  @override
+  @HiveField(5)
+  String? get imgUrl;
 
   /// Create a copy of RemediesForCondition
   /// with the given fields replaced by the non-null parameter values.

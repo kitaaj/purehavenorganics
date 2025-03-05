@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purehavenorganics/core/config/app_router.dart';
 import 'package:purehavenorganics/core/utils/get_icon_for_type.dart';
+import 'package:purehavenorganics/core/utils/remedy/remedy_detail_arguments.dart';
 import 'package:purehavenorganics/domain/entities/search_suggestion.dart';
 import 'package:purehavenorganics/main.dart';
 import 'package:purehavenorganics/presentation/providers/providers.dart';
+import 'package:purehavenorganics/presentation/providers/remedy_providers.dart';
 
 class AdvancedSearchBar extends ConsumerStatefulWidget {
   const AdvancedSearchBar({super.key});
@@ -97,27 +100,36 @@ class _AdvancedSearchBarState extends ConsumerState<AdvancedSearchBar> {
   }
 
   void _navigateToResult(BuildContext context, SearchSuggestion suggestion) {
-    final additionalInfo = suggestion.additionalInfo;
+    // suggestion.log();
+    final condition = ref.read(
+      selectedConditionProvider(suggestion.suggestion),
+    );
     switch (suggestion.suggestionType.toLowerCase()) {
       case 'remedy':
+        final remedyState = ref.read(
+          remedySearchProvider(suggestion.suggestion),
+        );
         Navigator.pushNamed(
           context,
-          '/remedy-detail',
-          arguments: suggestion.suggestion,
+          AppRoutes.remedyDetail,
+          arguments: RemedyDetailArguments.fromAsync(remedyState),
         );
         break;
       case 'common_name':
+        final remedyName =
+            suggestion.additionalInfo?['remedy_name'] ?? suggestion.suggestion;
+        final remedyState = ref.read(remedySearchProvider(remedyName));
         Navigator.pushNamed(
           context,
-          '/remedy-detail',
-          arguments: additionalInfo!['remedy_name'],
+          AppRoutes.remedyDetail,
+          arguments: RemedyDetailArguments.fromAsync(remedyState),
         );
         break;
       case 'condition':
         Navigator.pushNamed(
           context,
-          '/condition-detail',
-          arguments: suggestion.suggestion,
+          AppRoutes.conditionDetail,
+          arguments: condition,
         );
         break;
       case 'symptom':

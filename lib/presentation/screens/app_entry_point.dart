@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purehavenorganics/core/config/app_router.dart';
-import 'package:purehavenorganics/presentation/screens/categories_screen.dart';
 import 'package:purehavenorganics/presentation/screens/conditions_screen.dart';
 import 'package:purehavenorganics/presentation/screens/home_screen.dart';
 import 'package:purehavenorganics/presentation/screens/profile_screen.dart';
+import 'package:purehavenorganics/presentation/screens/remedies_screen.dart';
+import 'package:purehavenorganics/presentation/screens/saved_items_screen.dart';
 
 class AppEntryPoint extends ConsumerStatefulWidget {
   const AppEntryPoint({super.key});
@@ -17,7 +18,7 @@ class _AppEntryPointState extends ConsumerState<AppEntryPoint> {
   int _currentIndex = 0;
   final _pageController = PageController();
 
-@override
+  @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
@@ -31,12 +32,13 @@ class _AppEntryPointState extends ConsumerState<AppEntryPoint> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           const HomeScreen(),
-          const CategoriesScreen(),
+          const RemediesScreen(),
+          const SavedItemsScreen(),
           const ConditionsScreen(),
-          ProfileScreen(),
+          const ProfileScreen(),
         ],
       ),
-       bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
         onDestinationSelected: (index) {
           setState(() => _currentIndex = index);
@@ -48,10 +50,15 @@ class _AppEntryPointState extends ConsumerState<AppEntryPoint> {
             selectedIcon: Icon(Icons.home),
             label: 'Home',
           ),
-            NavigationDestination(
-            icon: Icon(Icons.category_outlined),
-            selectedIcon: Icon(Icons.category),
-            label: 'Categories',
+          NavigationDestination(
+            icon: Icon(Icons.grass_outlined),
+            selectedIcon: Icon(Icons.grass),
+            label: 'Remedies',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.favorite_outline),
+            selectedIcon: Icon(Icons.favorite),
+            label: 'Favorites',
           ),
           NavigationDestination(
             icon: Icon(Icons.healing_outlined),
@@ -65,7 +72,7 @@ class _AppEntryPointState extends ConsumerState<AppEntryPoint> {
           ),
         ],
       ),
-        floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, AppRoutes.search);
         },

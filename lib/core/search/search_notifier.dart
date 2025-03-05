@@ -21,7 +21,7 @@ class SearchNotifier extends StateNotifier<AsyncValue<SearchState>> {
         .distinct()
         .asyncMap(
           (query) => _performSearch(query),
-        ) // Changed from switchMap to asyncMap
+        ) 
         .listen(
           (results) => state = AsyncValue.data(results),
           onError:

@@ -21,11 +21,17 @@ FeaturedRemedy _$FeaturedRemedyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FeaturedRemedy {
+  @HiveField(0)
   String get remedyName => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get scientificName => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get categoryName => throw _privateConstructorUsedError;
+  @HiveField(3)
   List<String> get primaryUses => throw _privateConstructorUsedError;
+  @HiveField(4)
   int get effectivenessScore => throw _privateConstructorUsedError;
+  String? get imgUrl => throw _privateConstructorUsedError;
 
   /// Serializes this FeaturedRemedy to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,11 +51,12 @@ abstract class $FeaturedRemedyCopyWith<$Res> {
   ) = _$FeaturedRemedyCopyWithImpl<$Res, FeaturedRemedy>;
   @useResult
   $Res call({
-    String remedyName,
-    String? scientificName,
-    String categoryName,
-    List<String> primaryUses,
-    int effectivenessScore,
+    @HiveField(0) String remedyName,
+    @HiveField(1) String? scientificName,
+    @HiveField(2) String categoryName,
+    @HiveField(3) List<String> primaryUses,
+    @HiveField(4) int effectivenessScore,
+    String? imgUrl,
   });
 }
 
@@ -73,6 +80,7 @@ class _$FeaturedRemedyCopyWithImpl<$Res, $Val extends FeaturedRemedy>
     Object? categoryName = null,
     Object? primaryUses = null,
     Object? effectivenessScore = null,
+    Object? imgUrl = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -101,6 +109,11 @@ class _$FeaturedRemedyCopyWithImpl<$Res, $Val extends FeaturedRemedy>
                     ? _value.effectivenessScore
                     : effectivenessScore // ignore: cast_nullable_to_non_nullable
                         as int,
+            imgUrl:
+                freezed == imgUrl
+                    ? _value.imgUrl
+                    : imgUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -117,11 +130,12 @@ abstract class _$$FeaturedRemedyImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String remedyName,
-    String? scientificName,
-    String categoryName,
-    List<String> primaryUses,
-    int effectivenessScore,
+    @HiveField(0) String remedyName,
+    @HiveField(1) String? scientificName,
+    @HiveField(2) String categoryName,
+    @HiveField(3) List<String> primaryUses,
+    @HiveField(4) int effectivenessScore,
+    String? imgUrl,
   });
 }
 
@@ -144,6 +158,7 @@ class __$$FeaturedRemedyImplCopyWithImpl<$Res>
     Object? categoryName = null,
     Object? primaryUses = null,
     Object? effectivenessScore = null,
+    Object? imgUrl = freezed,
   }) {
     return _then(
       _$FeaturedRemedyImpl(
@@ -172,6 +187,11 @@ class __$$FeaturedRemedyImplCopyWithImpl<$Res>
                 ? _value.effectivenessScore
                 : effectivenessScore // ignore: cast_nullable_to_non_nullable
                     as int,
+        imgUrl:
+            freezed == imgUrl
+                ? _value.imgUrl
+                : imgUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -181,24 +201,29 @@ class __$$FeaturedRemedyImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FeaturedRemedyImpl implements _FeaturedRemedy {
   const _$FeaturedRemedyImpl({
-    required this.remedyName,
-    this.scientificName,
-    required this.categoryName,
-    required final List<String> primaryUses,
-    required this.effectivenessScore,
+    @HiveField(0) required this.remedyName,
+    @HiveField(1) this.scientificName,
+    @HiveField(2) required this.categoryName,
+    @HiveField(3) required final List<String> primaryUses,
+    @HiveField(4) required this.effectivenessScore,
+    this.imgUrl,
   }) : _primaryUses = primaryUses;
 
   factory _$FeaturedRemedyImpl.fromJson(Map<String, dynamic> json) =>
       _$$FeaturedRemedyImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String remedyName;
   @override
+  @HiveField(1)
   final String? scientificName;
   @override
+  @HiveField(2)
   final String categoryName;
   final List<String> _primaryUses;
   @override
+  @HiveField(3)
   List<String> get primaryUses {
     if (_primaryUses is EqualUnmodifiableListView) return _primaryUses;
     // ignore: implicit_dynamic_type
@@ -206,11 +231,14 @@ class _$FeaturedRemedyImpl implements _FeaturedRemedy {
   }
 
   @override
+  @HiveField(4)
   final int effectivenessScore;
+  @override
+  final String? imgUrl;
 
   @override
   String toString() {
-    return 'FeaturedRemedy(remedyName: $remedyName, scientificName: $scientificName, categoryName: $categoryName, primaryUses: $primaryUses, effectivenessScore: $effectivenessScore)';
+    return 'FeaturedRemedy(remedyName: $remedyName, scientificName: $scientificName, categoryName: $categoryName, primaryUses: $primaryUses, effectivenessScore: $effectivenessScore, imgUrl: $imgUrl)';
   }
 
   @override
@@ -229,7 +257,8 @@ class _$FeaturedRemedyImpl implements _FeaturedRemedy {
               _primaryUses,
             ) &&
             (identical(other.effectivenessScore, effectivenessScore) ||
-                other.effectivenessScore == effectivenessScore));
+                other.effectivenessScore == effectivenessScore) &&
+            (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -241,6 +270,7 @@ class _$FeaturedRemedyImpl implements _FeaturedRemedy {
     categoryName,
     const DeepCollectionEquality().hash(_primaryUses),
     effectivenessScore,
+    imgUrl,
   );
 
   /// Create a copy of FeaturedRemedy
@@ -262,26 +292,34 @@ class _$FeaturedRemedyImpl implements _FeaturedRemedy {
 
 abstract class _FeaturedRemedy implements FeaturedRemedy {
   const factory _FeaturedRemedy({
-    required final String remedyName,
-    final String? scientificName,
-    required final String categoryName,
-    required final List<String> primaryUses,
-    required final int effectivenessScore,
+    @HiveField(0) required final String remedyName,
+    @HiveField(1) final String? scientificName,
+    @HiveField(2) required final String categoryName,
+    @HiveField(3) required final List<String> primaryUses,
+    @HiveField(4) required final int effectivenessScore,
+    final String? imgUrl,
   }) = _$FeaturedRemedyImpl;
 
   factory _FeaturedRemedy.fromJson(Map<String, dynamic> json) =
       _$FeaturedRemedyImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get remedyName;
   @override
+  @HiveField(1)
   String? get scientificName;
   @override
+  @HiveField(2)
   String get categoryName;
   @override
+  @HiveField(3)
   List<String> get primaryUses;
   @override
+  @HiveField(4)
   int get effectivenessScore;
+  @override
+  String? get imgUrl;
 
   /// Create a copy of FeaturedRemedy
   /// with the given fields replaced by the non-null parameter values.

@@ -16,6 +16,7 @@ _$FeaturedRemedyImpl _$$FeaturedRemedyImplFromJson(Map<String, dynamic> json) =>
               .map((e) => e as String)
               .toList(),
       effectivenessScore: (json['effectivenessScore'] as num).toInt(),
+      imgUrl: json['imgUrl'] as String?,
     );
 
 Map<String, dynamic> _$$FeaturedRemedyImplToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$FeaturedRemedyImplToJson(
   'categoryName': instance.categoryName,
   'primaryUses': instance.primaryUses,
   'effectivenessScore': instance.effectivenessScore,
+  'imgUrl': instance.imgUrl,
 };

@@ -1,72 +1,144 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:purehavenorganics/domain/entities/remedy.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class RemedyCard extends StatelessWidget {
   final Remedy remedy;
   final VoidCallback? onTap;
-
-  const RemedyCard({required this.remedy, this.onTap, super.key});
+  final bool showChips;
+  const RemedyCard({
+    required this.remedy,
+    this.onTap,
+    super.key,
+    this.showChips = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: Clip.hardEdge,
+      elevation: 2,
       child: InkWell(
         onTap: onTap,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+          fit: StackFit.expand,
+          alignment: AlignmentDirectional.bottomStart,
           children: [
-            // Placeholder for remedy image
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Container(
-                color: Colors.grey.shade200,
-                child: Center(
-                  child: Icon(
-                    Icons.healing,
-                    size: 48,
-                    color: Colors.grey.shade400,
+            remedy.imgUrl != null
+                ? CachedNetworkImage(
+                  imageUrl: remedy.imgUrl!,
+                  fit: BoxFit.cover,
+                  fadeInDuration: const Duration(milliseconds: 500),
+                  fadeInCurve: Curves.easeIn,
+                  placeholder:
+                      (context, url) =>
+                          Image.memory(kTransparentImage, fit: BoxFit.cover),
+                  errorWidget:
+                      (context, url, error) => Text('Failed to load image'),
+                )
+                : Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.secondary,
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    remedy.name,
-                    style: Theme.of(context).textTheme.titleMedium,
+
+            // Content Overlay
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 6.0,
+                  horizontal: 12.0,
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.black87, Colors.transparent],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
                   ),
-                  const SizedBox(height: 8),
-                  if (remedy.scientificName != null)
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      remedy.scientificName!,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontStyle: FontStyle.italic,
+                      remedy.name,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
                       ),
+                      overflow: TextOverflow.clip,
+                      softWrap: false,
                     ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 4,
-                    runSpacing: 4.0,
-                    children: [
-                      for (final use in remedy.primaryEffects ?? [])
-                        Chip(
-                          label: Text(
-                            use.toString(),
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodySmall!.copyWith(fontSize: 8.0),
-                          ),
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
+                    // if (remedy.scientificName != null) ...[
+                    //   Text(
+                    //     remedy.scientificName!,
+                    //     style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    //       color: Colors.white70,
+                    //       fontStyle: FontStyle.italic,
+                    //     ),
+                    //     overflow: TextOverflow.clip,
+                    //     softWrap: false,
+                    //   ),
+                    // ],
+                    const SizedBox(height: 4),
+                    if (showChips &&
+                        (remedy.primaryEffects?.isNotEmpty ?? false)) ...[
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Wrap(
+                              spacing: 4,
+                              runSpacing: 4,
+                              children:
+                                  (remedy.primaryEffects ?? [])
+                                      .take(2)
+                                      .map(
+                                        (effect) => Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 4,
+                                            vertical: 3.5,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white.withValues(
+                                              alpha: 0.2,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              16,
+                                            ),
+                                          ),
+                                          child: Text(
+                                            effect.toString(),
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 8,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                            overflow: TextOverflow.fade,
+                                            softWrap: false,
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                            ),
+                          ],
                         ),
+                      ),
                     ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

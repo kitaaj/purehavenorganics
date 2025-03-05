@@ -15,12 +15,20 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
+UserPreferences _$UserPreferencesFromJson(Map<String, dynamic> json) {
+  return _UserPreferences.fromJson(json);
+}
+
 /// @nodoc
 mixin _$UserPreferences {
   bool get darkMode => throw _privateConstructorUsedError;
   String get language => throw _privateConstructorUsedError;
-  List<String> get favoriteRemedies => throw _privateConstructorUsedError;
-  Map<String, dynamic> get notifications => throw _privateConstructorUsedError;
+  bool get pushNotifications => throw _privateConstructorUsedError;
+  bool get dailyTips => throw _privateConstructorUsedError;
+  bool get weeklyNewsletter => throw _privateConstructorUsedError;
+
+  /// Serializes this UserPreferences to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of UserPreferences
   /// with the given fields replaced by the non-null parameter values.
@@ -39,8 +47,9 @@ abstract class $UserPreferencesCopyWith<$Res> {
   $Res call({
     bool darkMode,
     String language,
-    List<String> favoriteRemedies,
-    Map<String, dynamic> notifications,
+    bool pushNotifications,
+    bool dailyTips,
+    bool weeklyNewsletter,
   });
 }
 
@@ -61,8 +70,9 @@ class _$UserPreferencesCopyWithImpl<$Res, $Val extends UserPreferences>
   $Res call({
     Object? darkMode = null,
     Object? language = null,
-    Object? favoriteRemedies = null,
-    Object? notifications = null,
+    Object? pushNotifications = null,
+    Object? dailyTips = null,
+    Object? weeklyNewsletter = null,
   }) {
     return _then(
       _value.copyWith(
@@ -76,16 +86,21 @@ class _$UserPreferencesCopyWithImpl<$Res, $Val extends UserPreferences>
                     ? _value.language
                     : language // ignore: cast_nullable_to_non_nullable
                         as String,
-            favoriteRemedies:
-                null == favoriteRemedies
-                    ? _value.favoriteRemedies
-                    : favoriteRemedies // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            notifications:
-                null == notifications
-                    ? _value.notifications
-                    : notifications // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>,
+            pushNotifications:
+                null == pushNotifications
+                    ? _value.pushNotifications
+                    : pushNotifications // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            dailyTips:
+                null == dailyTips
+                    ? _value.dailyTips
+                    : dailyTips // ignore: cast_nullable_to_non_nullable
+                        as bool,
+            weeklyNewsletter:
+                null == weeklyNewsletter
+                    ? _value.weeklyNewsletter
+                    : weeklyNewsletter // ignore: cast_nullable_to_non_nullable
+                        as bool,
           )
           as $Val,
     );
@@ -104,8 +119,9 @@ abstract class _$$UserPreferencesImplCopyWith<$Res>
   $Res call({
     bool darkMode,
     String language,
-    List<String> favoriteRemedies,
-    Map<String, dynamic> notifications,
+    bool pushNotifications,
+    bool dailyTips,
+    bool weeklyNewsletter,
   });
 }
 
@@ -125,8 +141,9 @@ class __$$UserPreferencesImplCopyWithImpl<$Res>
   $Res call({
     Object? darkMode = null,
     Object? language = null,
-    Object? favoriteRemedies = null,
-    Object? notifications = null,
+    Object? pushNotifications = null,
+    Object? dailyTips = null,
+    Object? weeklyNewsletter = null,
   }) {
     return _then(
       _$UserPreferencesImpl(
@@ -140,31 +157,39 @@ class __$$UserPreferencesImplCopyWithImpl<$Res>
                 ? _value.language
                 : language // ignore: cast_nullable_to_non_nullable
                     as String,
-        favoriteRemedies:
-            null == favoriteRemedies
-                ? _value._favoriteRemedies
-                : favoriteRemedies // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        notifications:
-            null == notifications
-                ? _value._notifications
-                : notifications // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>,
+        pushNotifications:
+            null == pushNotifications
+                ? _value.pushNotifications
+                : pushNotifications // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        dailyTips:
+            null == dailyTips
+                ? _value.dailyTips
+                : dailyTips // ignore: cast_nullable_to_non_nullable
+                    as bool,
+        weeklyNewsletter:
+            null == weeklyNewsletter
+                ? _value.weeklyNewsletter
+                : weeklyNewsletter // ignore: cast_nullable_to_non_nullable
+                    as bool,
       ),
     );
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$UserPreferencesImpl implements _UserPreferences {
   const _$UserPreferencesImpl({
     this.darkMode = false,
-    this.language = 'en',
-    final List<String> favoriteRemedies = const [],
-    final Map<String, dynamic> notifications = const {},
-  }) : _favoriteRemedies = favoriteRemedies,
-       _notifications = notifications;
+    this.language = 'en_US',
+    this.pushNotifications = true,
+    this.dailyTips = true,
+    this.weeklyNewsletter = true,
+  });
+
+  factory _$UserPreferencesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserPreferencesImplFromJson(json);
 
   @override
   @JsonKey()
@@ -172,28 +197,19 @@ class _$UserPreferencesImpl implements _UserPreferences {
   @override
   @JsonKey()
   final String language;
-  final List<String> _favoriteRemedies;
   @override
   @JsonKey()
-  List<String> get favoriteRemedies {
-    if (_favoriteRemedies is EqualUnmodifiableListView)
-      return _favoriteRemedies;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_favoriteRemedies);
-  }
-
-  final Map<String, dynamic> _notifications;
+  final bool pushNotifications;
   @override
   @JsonKey()
-  Map<String, dynamic> get notifications {
-    if (_notifications is EqualUnmodifiableMapView) return _notifications;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_notifications);
-  }
+  final bool dailyTips;
+  @override
+  @JsonKey()
+  final bool weeklyNewsletter;
 
   @override
   String toString() {
-    return 'UserPreferences(darkMode: $darkMode, language: $language, favoriteRemedies: $favoriteRemedies, notifications: $notifications)';
+    return 'UserPreferences(darkMode: $darkMode, language: $language, pushNotifications: $pushNotifications, dailyTips: $dailyTips, weeklyNewsletter: $weeklyNewsletter)';
   }
 
   @override
@@ -205,23 +221,23 @@ class _$UserPreferencesImpl implements _UserPreferences {
                 other.darkMode == darkMode) &&
             (identical(other.language, language) ||
                 other.language == language) &&
-            const DeepCollectionEquality().equals(
-              other._favoriteRemedies,
-              _favoriteRemedies,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._notifications,
-              _notifications,
-            ));
+            (identical(other.pushNotifications, pushNotifications) ||
+                other.pushNotifications == pushNotifications) &&
+            (identical(other.dailyTips, dailyTips) ||
+                other.dailyTips == dailyTips) &&
+            (identical(other.weeklyNewsletter, weeklyNewsletter) ||
+                other.weeklyNewsletter == weeklyNewsletter));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
     darkMode,
     language,
-    const DeepCollectionEquality().hash(_favoriteRemedies),
-    const DeepCollectionEquality().hash(_notifications),
+    pushNotifications,
+    dailyTips,
+    weeklyNewsletter,
   );
 
   /// Create a copy of UserPreferences
@@ -234,24 +250,35 @@ class _$UserPreferencesImpl implements _UserPreferences {
         this,
         _$identity,
       );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$UserPreferencesImplToJson(this);
+  }
 }
 
 abstract class _UserPreferences implements UserPreferences {
   const factory _UserPreferences({
     final bool darkMode,
     final String language,
-    final List<String> favoriteRemedies,
-    final Map<String, dynamic> notifications,
+    final bool pushNotifications,
+    final bool dailyTips,
+    final bool weeklyNewsletter,
   }) = _$UserPreferencesImpl;
+
+  factory _UserPreferences.fromJson(Map<String, dynamic> json) =
+      _$UserPreferencesImpl.fromJson;
 
   @override
   bool get darkMode;
   @override
   String get language;
   @override
-  List<String> get favoriteRemedies;
+  bool get pushNotifications;
   @override
-  Map<String, dynamic> get notifications;
+  bool get dailyTips;
+  @override
+  bool get weeklyNewsletter;
 
   /// Create a copy of UserPreferences
   /// with the given fields replaced by the non-null parameter values.

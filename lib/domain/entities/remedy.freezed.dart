@@ -21,39 +21,73 @@ Remedy _$RemedyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Remedy {
+  @HiveField(0)
   int get remedyId => throw _privateConstructorUsedError;
+  @HiveField(1)
   int get categoryId => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get scientificName => throw _privateConstructorUsedError;
+  @HiveField(4)
   List<String>? get commonNames => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get activeComponents =>
+  @HiveField(5)
+  List<ActiveComponent>? get activeComponents =>
       throw _privateConstructorUsedError;
+  @HiveField(6)
   List<String>? get naturalSources => throw _privateConstructorUsedError;
+  @HiveField(7)
   List<String>? get additionalBenefits => throw _privateConstructorUsedError;
+  @HiveField(8)
   String? get mechanismOfAction => throw _privateConstructorUsedError;
+  @HiveField(9)
   List<String>? get primaryEffects => throw _privateConstructorUsedError;
+  @HiveField(10)
   List<String>? get secondaryEffects => throw _privateConstructorUsedError;
+  @HiveField(11)
   List<String>? get preparationMethods => throw _privateConstructorUsedError;
+  @HiveField(12)
   String? get instructions => throw _privateConstructorUsedError;
+  @HiveField(13)
   String? get dosage => throw _privateConstructorUsedError;
+  @HiveField(14)
   String? get timing => throw _privateConstructorUsedError;
+  @HiveField(15)
   String? get recommendedFrequency => throw _privateConstructorUsedError;
+  @HiveField(16)
   String? get treatmentDuration => throw _privateConstructorUsedError;
+  @HiveField(17)
   List<String>? get availableForms => throw _privateConstructorUsedError;
+  @HiveField(18)
   String? get didYouKnow => throw _privateConstructorUsedError;
+  @HiveField(19)
   String? get precautions => throw _privateConstructorUsedError;
+  @HiveField(20)
   List<String>? get sideEffects => throw _privateConstructorUsedError;
+  @HiveField(21)
   String? get contraindications => throw _privateConstructorUsedError;
+  @HiveField(22)
   String? get drugInteractions => throw _privateConstructorUsedError;
+  @HiveField(23)
   String? get allergies => throw _privateConstructorUsedError;
+  @HiveField(24)
   List<String>? get suitableFor => throw _privateConstructorUsedError;
+  @HiveField(25)
   List<String>? get notSuitableFor => throw _privateConstructorUsedError;
+  @HiveField(26)
   bool get medicalSupervisionRequired => throw _privateConstructorUsedError;
+  @HiveField(27)
   String? get complementToMedication => throw _privateConstructorUsedError;
+  @HiveField(28)
   List<String>? get tags => throw _privateConstructorUsedError;
+  @HiveField(29)
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @HiveField(30)
   DateTime? get updatedAt => throw _privateConstructorUsedError;
+  @HiveField(31)
   List<int> get conditions => throw _privateConstructorUsedError;
+  @HiveField(32)
+  String? get imgUrl => throw _privateConstructorUsedError;
 
   /// Serializes this Remedy to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -70,38 +104,39 @@ abstract class $RemedyCopyWith<$Res> {
       _$RemedyCopyWithImpl<$Res, Remedy>;
   @useResult
   $Res call({
-    int remedyId,
-    int categoryId,
-    String name,
-    String? scientificName,
-    List<String>? commonNames,
-    Map<String, dynamic>? activeComponents,
-    List<String>? naturalSources,
-    List<String>? additionalBenefits,
-    String? mechanismOfAction,
-    List<String>? primaryEffects,
-    List<String>? secondaryEffects,
-    List<String>? preparationMethods,
-    String? instructions,
-    String? dosage,
-    String? timing,
-    String? recommendedFrequency,
-    String? treatmentDuration,
-    List<String>? availableForms,
-    String? didYouKnow,
-    String? precautions,
-    List<String>? sideEffects,
-    String? contraindications,
-    String? drugInteractions,
-    String? allergies,
-    List<String>? suitableFor,
-    List<String>? notSuitableFor,
-    bool medicalSupervisionRequired,
-    String? complementToMedication,
-    List<String>? tags,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    List<int> conditions,
+    @HiveField(0) int remedyId,
+    @HiveField(1) int categoryId,
+    @HiveField(2) String name,
+    @HiveField(3) String? scientificName,
+    @HiveField(4) List<String>? commonNames,
+    @HiveField(5) List<ActiveComponent>? activeComponents,
+    @HiveField(6) List<String>? naturalSources,
+    @HiveField(7) List<String>? additionalBenefits,
+    @HiveField(8) String? mechanismOfAction,
+    @HiveField(9) List<String>? primaryEffects,
+    @HiveField(10) List<String>? secondaryEffects,
+    @HiveField(11) List<String>? preparationMethods,
+    @HiveField(12) String? instructions,
+    @HiveField(13) String? dosage,
+    @HiveField(14) String? timing,
+    @HiveField(15) String? recommendedFrequency,
+    @HiveField(16) String? treatmentDuration,
+    @HiveField(17) List<String>? availableForms,
+    @HiveField(18) String? didYouKnow,
+    @HiveField(19) String? precautions,
+    @HiveField(20) List<String>? sideEffects,
+    @HiveField(21) String? contraindications,
+    @HiveField(22) String? drugInteractions,
+    @HiveField(23) String? allergies,
+    @HiveField(24) List<String>? suitableFor,
+    @HiveField(25) List<String>? notSuitableFor,
+    @HiveField(26) bool medicalSupervisionRequired,
+    @HiveField(27) String? complementToMedication,
+    @HiveField(28) List<String>? tags,
+    @HiveField(29) DateTime? createdAt,
+    @HiveField(30) DateTime? updatedAt,
+    @HiveField(31) List<int> conditions,
+    @HiveField(32) String? imgUrl,
   });
 }
 
@@ -152,6 +187,7 @@ class _$RemedyCopyWithImpl<$Res, $Val extends Remedy>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? conditions = null,
+    Object? imgUrl = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -184,7 +220,7 @@ class _$RemedyCopyWithImpl<$Res, $Val extends Remedy>
                 freezed == activeComponents
                     ? _value.activeComponents
                     : activeComponents // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
+                        as List<ActiveComponent>?,
             naturalSources:
                 freezed == naturalSources
                     ? _value.naturalSources
@@ -315,6 +351,11 @@ class _$RemedyCopyWithImpl<$Res, $Val extends Remedy>
                     ? _value.conditions
                     : conditions // ignore: cast_nullable_to_non_nullable
                         as List<int>,
+            imgUrl:
+                freezed == imgUrl
+                    ? _value.imgUrl
+                    : imgUrl // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -330,38 +371,39 @@ abstract class _$$RemedyImplCopyWith<$Res> implements $RemedyCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    int remedyId,
-    int categoryId,
-    String name,
-    String? scientificName,
-    List<String>? commonNames,
-    Map<String, dynamic>? activeComponents,
-    List<String>? naturalSources,
-    List<String>? additionalBenefits,
-    String? mechanismOfAction,
-    List<String>? primaryEffects,
-    List<String>? secondaryEffects,
-    List<String>? preparationMethods,
-    String? instructions,
-    String? dosage,
-    String? timing,
-    String? recommendedFrequency,
-    String? treatmentDuration,
-    List<String>? availableForms,
-    String? didYouKnow,
-    String? precautions,
-    List<String>? sideEffects,
-    String? contraindications,
-    String? drugInteractions,
-    String? allergies,
-    List<String>? suitableFor,
-    List<String>? notSuitableFor,
-    bool medicalSupervisionRequired,
-    String? complementToMedication,
-    List<String>? tags,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    List<int> conditions,
+    @HiveField(0) int remedyId,
+    @HiveField(1) int categoryId,
+    @HiveField(2) String name,
+    @HiveField(3) String? scientificName,
+    @HiveField(4) List<String>? commonNames,
+    @HiveField(5) List<ActiveComponent>? activeComponents,
+    @HiveField(6) List<String>? naturalSources,
+    @HiveField(7) List<String>? additionalBenefits,
+    @HiveField(8) String? mechanismOfAction,
+    @HiveField(9) List<String>? primaryEffects,
+    @HiveField(10) List<String>? secondaryEffects,
+    @HiveField(11) List<String>? preparationMethods,
+    @HiveField(12) String? instructions,
+    @HiveField(13) String? dosage,
+    @HiveField(14) String? timing,
+    @HiveField(15) String? recommendedFrequency,
+    @HiveField(16) String? treatmentDuration,
+    @HiveField(17) List<String>? availableForms,
+    @HiveField(18) String? didYouKnow,
+    @HiveField(19) String? precautions,
+    @HiveField(20) List<String>? sideEffects,
+    @HiveField(21) String? contraindications,
+    @HiveField(22) String? drugInteractions,
+    @HiveField(23) String? allergies,
+    @HiveField(24) List<String>? suitableFor,
+    @HiveField(25) List<String>? notSuitableFor,
+    @HiveField(26) bool medicalSupervisionRequired,
+    @HiveField(27) String? complementToMedication,
+    @HiveField(28) List<String>? tags,
+    @HiveField(29) DateTime? createdAt,
+    @HiveField(30) DateTime? updatedAt,
+    @HiveField(31) List<int> conditions,
+    @HiveField(32) String? imgUrl,
   });
 }
 
@@ -411,6 +453,7 @@ class __$$RemedyImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? conditions = null,
+    Object? imgUrl = freezed,
   }) {
     return _then(
       _$RemedyImpl(
@@ -443,7 +486,7 @@ class __$$RemedyImplCopyWithImpl<$Res>
             freezed == activeComponents
                 ? _value._activeComponents
                 : activeComponents // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
+                    as List<ActiveComponent>?,
         naturalSources:
             freezed == naturalSources
                 ? _value._naturalSources
@@ -574,6 +617,11 @@ class __$$RemedyImplCopyWithImpl<$Res>
                 ? _value._conditions
                 : conditions // ignore: cast_nullable_to_non_nullable
                     as List<int>,
+        imgUrl:
+            freezed == imgUrl
+                ? _value.imgUrl
+                : imgUrl // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -583,38 +631,39 @@ class __$$RemedyImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RemedyImpl implements _Remedy {
   const _$RemedyImpl({
-    required this.remedyId,
-    required this.categoryId,
-    required this.name,
-    this.scientificName,
-    final List<String>? commonNames,
-    final Map<String, dynamic>? activeComponents,
-    final List<String>? naturalSources,
-    final List<String>? additionalBenefits,
-    this.mechanismOfAction,
-    final List<String>? primaryEffects,
-    final List<String>? secondaryEffects,
-    final List<String>? preparationMethods,
-    this.instructions,
-    this.dosage,
-    this.timing,
-    this.recommendedFrequency,
-    this.treatmentDuration,
-    final List<String>? availableForms,
-    this.didYouKnow,
-    this.precautions,
-    final List<String>? sideEffects,
-    this.contraindications,
-    this.drugInteractions,
-    this.allergies,
-    final List<String>? suitableFor,
-    final List<String>? notSuitableFor,
-    this.medicalSupervisionRequired = false,
-    this.complementToMedication,
-    final List<String>? tags,
-    this.createdAt,
-    this.updatedAt,
-    final List<int> conditions = const [],
+    @HiveField(0) required this.remedyId,
+    @HiveField(1) required this.categoryId,
+    @HiveField(2) required this.name,
+    @HiveField(3) this.scientificName,
+    @HiveField(4) final List<String>? commonNames,
+    @HiveField(5) final List<ActiveComponent>? activeComponents,
+    @HiveField(6) final List<String>? naturalSources,
+    @HiveField(7) final List<String>? additionalBenefits,
+    @HiveField(8) this.mechanismOfAction,
+    @HiveField(9) final List<String>? primaryEffects,
+    @HiveField(10) final List<String>? secondaryEffects,
+    @HiveField(11) final List<String>? preparationMethods,
+    @HiveField(12) this.instructions,
+    @HiveField(13) this.dosage,
+    @HiveField(14) this.timing,
+    @HiveField(15) this.recommendedFrequency,
+    @HiveField(16) this.treatmentDuration,
+    @HiveField(17) final List<String>? availableForms,
+    @HiveField(18) this.didYouKnow,
+    @HiveField(19) this.precautions,
+    @HiveField(20) final List<String>? sideEffects,
+    @HiveField(21) this.contraindications,
+    @HiveField(22) this.drugInteractions,
+    @HiveField(23) this.allergies,
+    @HiveField(24) final List<String>? suitableFor,
+    @HiveField(25) final List<String>? notSuitableFor,
+    @HiveField(26) this.medicalSupervisionRequired = false,
+    @HiveField(27) this.complementToMedication,
+    @HiveField(28) final List<String>? tags,
+    @HiveField(29) this.createdAt,
+    @HiveField(30) this.updatedAt,
+    @HiveField(31) final List<int> conditions = const [],
+    @HiveField(32) this.imgUrl,
   }) : _commonNames = commonNames,
        _activeComponents = activeComponents,
        _naturalSources = naturalSources,
@@ -633,15 +682,20 @@ class _$RemedyImpl implements _Remedy {
       _$$RemedyImplFromJson(json);
 
   @override
+  @HiveField(0)
   final int remedyId;
   @override
+  @HiveField(1)
   final int categoryId;
   @override
+  @HiveField(2)
   final String name;
   @override
+  @HiveField(3)
   final String? scientificName;
   final List<String>? _commonNames;
   @override
+  @HiveField(4)
   List<String>? get commonNames {
     final value = _commonNames;
     if (value == null) return null;
@@ -650,18 +704,21 @@ class _$RemedyImpl implements _Remedy {
     return EqualUnmodifiableListView(value);
   }
 
-  final Map<String, dynamic>? _activeComponents;
+  final List<ActiveComponent>? _activeComponents;
   @override
-  Map<String, dynamic>? get activeComponents {
+  @HiveField(5)
+  List<ActiveComponent>? get activeComponents {
     final value = _activeComponents;
     if (value == null) return null;
-    if (_activeComponents is EqualUnmodifiableMapView) return _activeComponents;
+    if (_activeComponents is EqualUnmodifiableListView)
+      return _activeComponents;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableListView(value);
   }
 
   final List<String>? _naturalSources;
   @override
+  @HiveField(6)
   List<String>? get naturalSources {
     final value = _naturalSources;
     if (value == null) return null;
@@ -672,6 +729,7 @@ class _$RemedyImpl implements _Remedy {
 
   final List<String>? _additionalBenefits;
   @override
+  @HiveField(7)
   List<String>? get additionalBenefits {
     final value = _additionalBenefits;
     if (value == null) return null;
@@ -682,9 +740,11 @@ class _$RemedyImpl implements _Remedy {
   }
 
   @override
+  @HiveField(8)
   final String? mechanismOfAction;
   final List<String>? _primaryEffects;
   @override
+  @HiveField(9)
   List<String>? get primaryEffects {
     final value = _primaryEffects;
     if (value == null) return null;
@@ -695,6 +755,7 @@ class _$RemedyImpl implements _Remedy {
 
   final List<String>? _secondaryEffects;
   @override
+  @HiveField(10)
   List<String>? get secondaryEffects {
     final value = _secondaryEffects;
     if (value == null) return null;
@@ -706,6 +767,7 @@ class _$RemedyImpl implements _Remedy {
 
   final List<String>? _preparationMethods;
   @override
+  @HiveField(11)
   List<String>? get preparationMethods {
     final value = _preparationMethods;
     if (value == null) return null;
@@ -716,17 +778,23 @@ class _$RemedyImpl implements _Remedy {
   }
 
   @override
+  @HiveField(12)
   final String? instructions;
   @override
+  @HiveField(13)
   final String? dosage;
   @override
+  @HiveField(14)
   final String? timing;
   @override
+  @HiveField(15)
   final String? recommendedFrequency;
   @override
+  @HiveField(16)
   final String? treatmentDuration;
   final List<String>? _availableForms;
   @override
+  @HiveField(17)
   List<String>? get availableForms {
     final value = _availableForms;
     if (value == null) return null;
@@ -736,11 +804,14 @@ class _$RemedyImpl implements _Remedy {
   }
 
   @override
+  @HiveField(18)
   final String? didYouKnow;
   @override
+  @HiveField(19)
   final String? precautions;
   final List<String>? _sideEffects;
   @override
+  @HiveField(20)
   List<String>? get sideEffects {
     final value = _sideEffects;
     if (value == null) return null;
@@ -750,13 +821,17 @@ class _$RemedyImpl implements _Remedy {
   }
 
   @override
+  @HiveField(21)
   final String? contraindications;
   @override
+  @HiveField(22)
   final String? drugInteractions;
   @override
+  @HiveField(23)
   final String? allergies;
   final List<String>? _suitableFor;
   @override
+  @HiveField(24)
   List<String>? get suitableFor {
     final value = _suitableFor;
     if (value == null) return null;
@@ -767,6 +842,7 @@ class _$RemedyImpl implements _Remedy {
 
   final List<String>? _notSuitableFor;
   @override
+  @HiveField(25)
   List<String>? get notSuitableFor {
     final value = _notSuitableFor;
     if (value == null) return null;
@@ -777,11 +853,14 @@ class _$RemedyImpl implements _Remedy {
 
   @override
   @JsonKey()
+  @HiveField(26)
   final bool medicalSupervisionRequired;
   @override
+  @HiveField(27)
   final String? complementToMedication;
   final List<String>? _tags;
   @override
+  @HiveField(28)
   List<String>? get tags {
     final value = _tags;
     if (value == null) return null;
@@ -791,12 +870,15 @@ class _$RemedyImpl implements _Remedy {
   }
 
   @override
+  @HiveField(29)
   final DateTime? createdAt;
   @override
+  @HiveField(30)
   final DateTime? updatedAt;
   final List<int> _conditions;
   @override
   @JsonKey()
+  @HiveField(31)
   List<int> get conditions {
     if (_conditions is EqualUnmodifiableListView) return _conditions;
     // ignore: implicit_dynamic_type
@@ -804,8 +886,12 @@ class _$RemedyImpl implements _Remedy {
   }
 
   @override
+  @HiveField(32)
+  final String? imgUrl;
+
+  @override
   String toString() {
-    return 'Remedy(remedyId: $remedyId, categoryId: $categoryId, name: $name, scientificName: $scientificName, commonNames: $commonNames, activeComponents: $activeComponents, naturalSources: $naturalSources, additionalBenefits: $additionalBenefits, mechanismOfAction: $mechanismOfAction, primaryEffects: $primaryEffects, secondaryEffects: $secondaryEffects, preparationMethods: $preparationMethods, instructions: $instructions, dosage: $dosage, timing: $timing, recommendedFrequency: $recommendedFrequency, treatmentDuration: $treatmentDuration, availableForms: $availableForms, didYouKnow: $didYouKnow, precautions: $precautions, sideEffects: $sideEffects, contraindications: $contraindications, drugInteractions: $drugInteractions, allergies: $allergies, suitableFor: $suitableFor, notSuitableFor: $notSuitableFor, medicalSupervisionRequired: $medicalSupervisionRequired, complementToMedication: $complementToMedication, tags: $tags, createdAt: $createdAt, updatedAt: $updatedAt, conditions: $conditions)';
+    return 'Remedy(remedyId: $remedyId, categoryId: $categoryId, name: $name, scientificName: $scientificName, commonNames: $commonNames, activeComponents: $activeComponents, naturalSources: $naturalSources, additionalBenefits: $additionalBenefits, mechanismOfAction: $mechanismOfAction, primaryEffects: $primaryEffects, secondaryEffects: $secondaryEffects, preparationMethods: $preparationMethods, instructions: $instructions, dosage: $dosage, timing: $timing, recommendedFrequency: $recommendedFrequency, treatmentDuration: $treatmentDuration, availableForms: $availableForms, didYouKnow: $didYouKnow, precautions: $precautions, sideEffects: $sideEffects, contraindications: $contraindications, drugInteractions: $drugInteractions, allergies: $allergies, suitableFor: $suitableFor, notSuitableFor: $notSuitableFor, medicalSupervisionRequired: $medicalSupervisionRequired, complementToMedication: $complementToMedication, tags: $tags, createdAt: $createdAt, updatedAt: $updatedAt, conditions: $conditions, imgUrl: $imgUrl)';
   }
 
   @override
@@ -900,7 +986,8 @@ class _$RemedyImpl implements _Remedy {
             const DeepCollectionEquality().equals(
               other._conditions,
               _conditions,
-            ));
+            ) &&
+            (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -939,6 +1026,7 @@ class _$RemedyImpl implements _Remedy {
     createdAt,
     updatedAt,
     const DeepCollectionEquality().hash(_conditions),
+    imgUrl,
   ]);
 
   /// Create a copy of Remedy
@@ -957,106 +1045,142 @@ class _$RemedyImpl implements _Remedy {
 
 abstract class _Remedy implements Remedy {
   const factory _Remedy({
-    required final int remedyId,
-    required final int categoryId,
-    required final String name,
-    final String? scientificName,
-    final List<String>? commonNames,
-    final Map<String, dynamic>? activeComponents,
-    final List<String>? naturalSources,
-    final List<String>? additionalBenefits,
-    final String? mechanismOfAction,
-    final List<String>? primaryEffects,
-    final List<String>? secondaryEffects,
-    final List<String>? preparationMethods,
-    final String? instructions,
-    final String? dosage,
-    final String? timing,
-    final String? recommendedFrequency,
-    final String? treatmentDuration,
-    final List<String>? availableForms,
-    final String? didYouKnow,
-    final String? precautions,
-    final List<String>? sideEffects,
-    final String? contraindications,
-    final String? drugInteractions,
-    final String? allergies,
-    final List<String>? suitableFor,
-    final List<String>? notSuitableFor,
-    final bool medicalSupervisionRequired,
-    final String? complementToMedication,
-    final List<String>? tags,
-    final DateTime? createdAt,
-    final DateTime? updatedAt,
-    final List<int> conditions,
+    @HiveField(0) required final int remedyId,
+    @HiveField(1) required final int categoryId,
+    @HiveField(2) required final String name,
+    @HiveField(3) final String? scientificName,
+    @HiveField(4) final List<String>? commonNames,
+    @HiveField(5) final List<ActiveComponent>? activeComponents,
+    @HiveField(6) final List<String>? naturalSources,
+    @HiveField(7) final List<String>? additionalBenefits,
+    @HiveField(8) final String? mechanismOfAction,
+    @HiveField(9) final List<String>? primaryEffects,
+    @HiveField(10) final List<String>? secondaryEffects,
+    @HiveField(11) final List<String>? preparationMethods,
+    @HiveField(12) final String? instructions,
+    @HiveField(13) final String? dosage,
+    @HiveField(14) final String? timing,
+    @HiveField(15) final String? recommendedFrequency,
+    @HiveField(16) final String? treatmentDuration,
+    @HiveField(17) final List<String>? availableForms,
+    @HiveField(18) final String? didYouKnow,
+    @HiveField(19) final String? precautions,
+    @HiveField(20) final List<String>? sideEffects,
+    @HiveField(21) final String? contraindications,
+    @HiveField(22) final String? drugInteractions,
+    @HiveField(23) final String? allergies,
+    @HiveField(24) final List<String>? suitableFor,
+    @HiveField(25) final List<String>? notSuitableFor,
+    @HiveField(26) final bool medicalSupervisionRequired,
+    @HiveField(27) final String? complementToMedication,
+    @HiveField(28) final List<String>? tags,
+    @HiveField(29) final DateTime? createdAt,
+    @HiveField(30) final DateTime? updatedAt,
+    @HiveField(31) final List<int> conditions,
+    @HiveField(32) final String? imgUrl,
   }) = _$RemedyImpl;
 
   factory _Remedy.fromJson(Map<String, dynamic> json) = _$RemedyImpl.fromJson;
 
   @override
+  @HiveField(0)
   int get remedyId;
   @override
+  @HiveField(1)
   int get categoryId;
   @override
+  @HiveField(2)
   String get name;
   @override
+  @HiveField(3)
   String? get scientificName;
   @override
+  @HiveField(4)
   List<String>? get commonNames;
   @override
-  Map<String, dynamic>? get activeComponents;
+  @HiveField(5)
+  List<ActiveComponent>? get activeComponents;
   @override
+  @HiveField(6)
   List<String>? get naturalSources;
   @override
+  @HiveField(7)
   List<String>? get additionalBenefits;
   @override
+  @HiveField(8)
   String? get mechanismOfAction;
   @override
+  @HiveField(9)
   List<String>? get primaryEffects;
   @override
+  @HiveField(10)
   List<String>? get secondaryEffects;
   @override
+  @HiveField(11)
   List<String>? get preparationMethods;
   @override
+  @HiveField(12)
   String? get instructions;
   @override
+  @HiveField(13)
   String? get dosage;
   @override
+  @HiveField(14)
   String? get timing;
   @override
+  @HiveField(15)
   String? get recommendedFrequency;
   @override
+  @HiveField(16)
   String? get treatmentDuration;
   @override
+  @HiveField(17)
   List<String>? get availableForms;
   @override
+  @HiveField(18)
   String? get didYouKnow;
   @override
+  @HiveField(19)
   String? get precautions;
   @override
+  @HiveField(20)
   List<String>? get sideEffects;
   @override
+  @HiveField(21)
   String? get contraindications;
   @override
+  @HiveField(22)
   String? get drugInteractions;
   @override
+  @HiveField(23)
   String? get allergies;
   @override
+  @HiveField(24)
   List<String>? get suitableFor;
   @override
+  @HiveField(25)
   List<String>? get notSuitableFor;
   @override
+  @HiveField(26)
   bool get medicalSupervisionRequired;
   @override
+  @HiveField(27)
   String? get complementToMedication;
   @override
+  @HiveField(28)
   List<String>? get tags;
   @override
+  @HiveField(29)
   DateTime? get createdAt;
   @override
+  @HiveField(30)
   DateTime? get updatedAt;
   @override
+  @HiveField(31)
   List<int> get conditions;
+  @override
+  @HiveField(32)
+  String? get imgUrl;
 
   /// Create a copy of Remedy
   /// with the given fields replaced by the non-null parameter values.
