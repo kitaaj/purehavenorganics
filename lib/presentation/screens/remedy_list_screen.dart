@@ -34,6 +34,7 @@ class _RemedyListScreenState extends ConsumerState<RemedyListScreen> {
   @override
   Widget build(BuildContext context) {
     final remediesAsync = ref.watch(allRemediesProvider);
+    final hasMore = ref.watch(allRemediesProvider.notifier).hasMore;
 
     return RefreshIndicator(
       onRefresh: () async {
@@ -101,18 +102,24 @@ class _RemedyListScreenState extends ConsumerState<RemedyListScreen> {
           SliverPadding(
             padding: const EdgeInsets.all(16),
             sliver: SliverToBoxAdapter(
-              child: Consumer(
-                builder: (context, ref, child) {
-                  final hasMore =
-                      ref.watch(allRemediesProvider.notifier).hasMore;
-                  final isLoading = remediesAsync.isLoading;
-                  return AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    child:
-                        (isLoading && hasMore)
-                            ? const Center(child: CircularProgressIndicator())
-                            : const SizedBox(),
-                  );
+              child: Builder(
+                builder: (context) {
+                  if (remediesAsync.isLoading && hasMore) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (!hasMore) {
+                    return Center(
+                      child: Text(
+                        '— The bottom line —',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    );
+                  }
+
+                  return const SizedBox();
                 },
               ),
             ),

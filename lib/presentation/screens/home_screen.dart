@@ -21,8 +21,8 @@ class HomeScreen extends ConsumerWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 80,
-            floating: true,
+            // expandedHeight: 80,
+            // floating: true,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: false,
@@ -127,10 +127,7 @@ class HomeScreen extends ConsumerWidget {
                 (remedies) => SliverToBoxAdapter(
                   child: FeaturedRemediesSection(remedies: remedies),
                 ),
-            loading:
-                () =>  SliverToBoxAdapter(
-                  child:  FeaturedSectionShimmer(),
-                ),
+            loading: () => SliverToBoxAdapter(child: FeaturedSectionShimmer()),
             error:
                 (error, _) => SliverToBoxAdapter(
                   child: Center(child: Text('Error: $error')),

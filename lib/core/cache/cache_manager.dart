@@ -123,6 +123,14 @@ class CacheManager {
     ]);
   }
 
+    static Future<void> clearCacheForKey<T>(String key) async {
+    final box = _getAppropriateBox<T>();
+    await box.clear();
+    await SharedPreferences.getInstance().then(
+      (prefs) => prefs.remove('${key}_timestamp'),
+    );
+  }
+
   static Future<bool> hasValidCache<T>(String key) async {
     final box = _getAppropriateBox<T>();
     if (box.isEmpty) return false;

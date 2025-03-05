@@ -6,11 +6,7 @@ void showAboutPopupDialog(BuildContext context) {
     applicationName: 'Pure Haven Organics',
     applicationVersion: '1.0.0',
     barrierDismissible: false,
-    applicationIcon: Image.asset(
-      'assets/images/logo.png',
-      width: 50,
-      height: 50,
-    ),
+    applicationIcon: Image.asset('assets/icon/logo.png', width: 50, height: 50),
     children: [
       const Text(
         'Pure Haven Organics is your trusted companion for natural remedies and holistic wellness. '

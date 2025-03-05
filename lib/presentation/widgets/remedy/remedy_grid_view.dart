@@ -15,38 +15,83 @@ class RemedyGridView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final remediesAsync = ref.watch(allRemediesProvider);
 
-    return remediesAsync.when(
-      data:
-          (remedies) => SliverGrid(
-            gridDelegate: context.responsiveGridDelegate,
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => RemedyCard(
-                remedy: remedies[index],
-                onTap: () {
-                  final remedy = remedies[index];
-
-                  Navigator.pushNamed(
+    return SliverMainAxisGroup(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'For You',
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                  style: Theme.of(
                     context,
-                    AppRoutes.remedyDetail,
-                    arguments: RemedyDetailArguments.fromRemedy(remedy),
-                  );
-                },
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        remediesAsync.when(
+          data: (remedies) {
+            final limitedRemedies = remedies.take(12);
+
+            return SliverGrid(
+              gridDelegate: context.responsiveGridDelegate,
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: RemedyCard(
+                    remedy: limitedRemedies.elementAt(index),
+                    onTap: () {
+                      final remedy = limitedRemedies.elementAt(index);
+
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.remedyDetail,
+                        arguments: RemedyDetailArguments.fromRemedy(remedy),
+                      );
+                    },
+                  ),
+                );
+              }, childCount: limitedRemedies.length),
+            );
+          },
+          loading:
+              () => SliverGrid(
+                gridDelegate: context.responsiveGridDelegate,
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => const RemedyCardShimmer(),
+                  childCount: 12,
+                ),
               ),
-              childCount: remedies.length,
+          error: (error, stack) {
+            'Error: $error\nStackTrace: $stack'.log();
+            return SliverToBoxAdapter(
+              child: Center(child: Text('Error: $error')),
+            );
+          },
+        ),
+
+        // Bottom Line
+        SliverPadding(
+          padding: const EdgeInsets.all(16),
+          sliver: SliverToBoxAdapter(
+            child: Center(
+              child: Text(
+                '— The bottom line —',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
             ),
           ),
-      loading:
-          () => SliverGrid(
-            gridDelegate: context.responsiveGridDelegate,
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => const RemedyCardShimmer(),
-              childCount: 12,
-            ),
-          ),
-      error: (error, stack) {
-        'Error: $error\nStackTrace: $stack'.log();
-        return SliverToBoxAdapter(child: Center(child: Text('Error: $error')));
-      },
+        ),
+      ],
     );
   }
 }
